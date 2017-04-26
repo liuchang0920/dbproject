@@ -1,0 +1,165 @@
+{% extends 'kickstar/base.html' %}
+
+{% load static %}
+
+{% block main-content %}
+
+<div class="container">
+<h3>Profile</h3>
+<ul id="tabs-swipe-demo" class="tabs">
+    <li class="tab col s3"><a  href="#account">Account</a></li>
+    <li class="tab col s3"><a  href="#following">Following</a></li>
+    <li class="tab col s3"><a class="active" href="#payment">Payment Methods</a></li>
+</ul>
+<div id="account" class="col m8 offset-m1">
+    <br><br>
+     <form class="col m8 offset-m1">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="email" type="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s3">
+              <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+              <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s3">
+              <input id="last_name" type="text" class="validate">
+              <label for="last_name">Last Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="password" type="password" class="validate">
+              <label for="password">Password</label>
+            </div>
+          </div>
+         <div class="row">
+            <div class="input-field col s6">
+              <input id="passwordR" type="password" class="validate">
+              <label for="passwordR">Repeat Password</label>
+            </div>
+         </div>
+         <div class="row">
+            <div class="input-field col s6">
+              <input id="Hometown" type="text" class="validate">
+              <label for="Hometown">Hometown</label>
+            </div>
+         </div>
+         <div class="row">
+            <div class="input-field col s6">
+              <input id="Hometown" type="text" class="validate">
+              <label for="Hometown">Interests <span class="text-grey small">(separate with ',')</span></label>
+            </div>
+         </div>
+
+         <input type="submit" class="btn red lighten-2"  value="Save Settings"/>
+     </form>
+    <br><br>
+
+</div>
+<div id="following" class="col">
+    <br><br>
+<div class="row">
+    <div class="col s4 m4">
+        <div class="card">
+            <div class="card-title">
+                Following
+            </div>
+            <div class="col m12 card-content">
+              <ul class="collection ">
+                <li class="collection-item "><div style="padding-bottom: 4%;">Alvin<a href="#!" class="secondary-content  btn ">follow</a></div></li>
+                <li class="collection-item "><div  style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
+                <li class="collection-item "><div  style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
+                <li class="collection-item "><div style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content  btn ">follow</a></div></li>
+                <li class="collection-item "><div  style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
+                <li class="collection-item "><div  style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
+{#                <li class="collection-item "><div>Alvin</div></li>#}
+              </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col s4 m4">
+        <div class="card">
+            <div class="card-title">
+                Followed
+            </div>
+            <div class="col m12 card-content">
+              <ul class="collection ">
+                     <li class="collection-item "><div style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content  btn red">unfollow</a></div></li>
+                <li class="collection-item "><div  style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content btn red">unfollow</a></div></li>
+                <li class="collection-item "><div  style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content btn red">unfollow</a></div></li>
+{#                <li class="collection-item "><div>Alvin</div></li>#}
+              </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div id="payment" class="col s12 ">
+    <div class="col m4">
+        <div class="row">
+            <div class="card col m4">
+                <div class="card-title">
+                    Credit card
+                </div>
+                <div class="card-content">
+                    <div><span>card number</span> 1234566789</div>
+                    <div><span>valid through</span> 09/17</div>
+                    <div><span>Security code</span> 123</div>
+                </div>
+            </div>
+            <div class="card col m4">
+                <div class="card-title">
+                    Credit card
+                </div>
+                <div class="card-content">
+                    <div><span>card number</span> 1234566789</div>
+                    <div><span>valid through</span> 09/17</div>
+                    <div><span>Security code</span> 123</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card col m4">
+                <div class="card-title">Add Card</div>
+                <div class="card-content">
+                    <div class="row">
+                        <form class="col s12">
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="cardnumber" type="text" class="validate">
+                              <label for="cardnumber">Card Number</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="cardname" type="text" class="validate">
+                              <label for="cardname">Card Name</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s6">
+                              <input id="validthrough" type="text" class="validate">
+                              <label for="validthrough">Valid (MM/YY)</label>
+                            </div>
+                            <div class="input-field col s6">
+                              <input id="securitycode" type="text" class="validate">
+                              <label for="securitycode">Security Code</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <input class="btn red lighten-3" type="submit" value="Submit">
+                          </div>
+                        </form>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+{% endblock %}

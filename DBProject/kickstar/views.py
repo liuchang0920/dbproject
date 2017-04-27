@@ -26,3 +26,7 @@ def profile(request):
 
 def project(request):
     return render(request, 'kickstar/project.html', {})
+
+
+def back_project(request):
+    return render(request, 'kickstar/backproject.html', {})

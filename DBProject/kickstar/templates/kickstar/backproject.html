@@ -1,0 +1,72 @@
+{% extends 'kickstar/base.html' %}
+
+{% load static %}
+
+{% block main-content %}
+
+<div class="row">
+    <div class="col m12 center-align red lighten-5">
+        <br>
+        <h4>  Project Name </h4>
+        <span class="grey-text small">by John Wall</span>
+        <br><p></p><br>
+    </div>
+</div>
+    <br>
+<div class="row">
+<div class="col m10 offset-m2">
+    <div class="col m4">
+        <h5>Support this Project</h5>
+    </div>
+</div>
+<div class="col m10 offset-m2">
+    <div class="col m7">
+          <ul class="collection">
+            <li class="collection-item avatar">
+              <img src="{% static 'kickstar/images/Tunning-icon.png' %}" alt="" class="circle">
+              <span class="title flow-text">$10 or more</span>
+              <p>Innocent Bystander<br>
+                 <span class="grey-text">we will give a tiny reward for the donation!</span>
+              </p>
+                <br>
+                <div class="divider"></div>
+                <br>
+                <form class="row">
+                    <input type="text" class="input-field col m6" placeholder="10" size="50">
+                    <a href="#!" class="secondary-content"><i class="fa fa-credit-card-alt fa-3x"></i></a>
+                </form>
+            </li>
+            <li class="collection-item avatar" >
+              <img src="{% static 'kickstar/images/Tunning-icon.png' %}" alt="" class="circle">
+              <span class="title flow-text">$25 or more</span>
+              <p>Protagonist<br>
+                 <span class="grey-text">we will give a medium reward for the donation!</span>
+              </p>
+                <br>
+                <div class="divider"></div>
+                <br>
+                <form class="row">
+                    <input type="text" class="input-field col m6" placeholder="25" size="50">
+                    <a href="#!" class="secondary-content"><i class="fa fa-credit-card-alt fa-3x"></i></a>
+                </form>
+
+            </li>
+            <li class="collection-item avatar">
+              <img src="{% static 'kickstar/images/Tunning-icon.png' %}" class="circle">
+              <span class="title flow-text">$100 or more</span>
+              <p>Crazy people<br>
+                 <span class="grey-text">we will give a huge reward for the donation!</span>
+              </p>
+                <br>
+                <div class="divider"></div>
+                <br>
+                <form class="row">
+                    <input type="text" class="input-field col m6" placeholder="100" size="50">
+                    <a href="#!" class="secondary-content"  alt="pledge this project"><i class="fa fa-credit-card-alt fa-3x"  alt="pledge this project"></i></a>
+                </form>
+            </li>
+          </ul>
+    </div>
+</div>
+</div>
+{% endblock %}

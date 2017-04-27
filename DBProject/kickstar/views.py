@@ -22,3 +22,7 @@ def activity(request):
 # should be post
 def profile(request):
     return render(request, 'kickstar/profile.html', {})
+
+
+def project(request):
+    return render(request, 'kickstar/project.html', {})

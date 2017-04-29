@@ -30,3 +30,16 @@ def project(request):
 
 def back_project(request):
     return render(request, 'kickstar/backproject.html', {})
+
+
+def payment(request):
+    return render(request, 'kickstar/payment.html', {})
+
+
+def startproject(request):
+    return render(request, 'kickstar/startproject.html', {})
+
+
+def updateproject(reqeust):
+    return render(reqeust, 'kickstar/updateproject.html', {})
+

@@ -45,9 +45,12 @@ class Logon(models.Model):
 
     class Meta:
         db_table = 'logon'
+        unique_together = (('user'),)
 
     def __str__(self):
         return self.user.username
+
+
 
 
 class Projectlike(models.Model):
@@ -146,11 +149,11 @@ class User(models.Model):
 
 
 class Usercreditcardinfo(models.Model):
-    username = models.ForeignKey('User', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
     creditno = models.CharField(max_length=50)
     validdate = models.DateField()
     securitycode = models.CharField(max_length=10)
 
     class Meta:
         db_table = 'userCreditcardInfo'
-        unique_together = (('username', 'creditno'),)
+        unique_together = (('user', 'creditno'),)

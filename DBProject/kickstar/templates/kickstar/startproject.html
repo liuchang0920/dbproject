@@ -1,0 +1,72 @@
+{% extends 'kickstar/base.html' %}
+
+{% load static %}
+
+{% block main-content %}
+
+<div class="container">
+    <form class="col m10 offset-m2">
+      <div class="row">
+        <div class="input-field col m6 offset-m3">
+            <select>
+              <option value="" disabled selected>Choose your option</option>
+              <option value="1">Music</option>
+              <option value="2">Sport</option>
+              <option value="3">Games</option>
+            </select>
+            <label>Choose a category</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m6 offset-m3">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">Short Blurb</label>
+        </div>
+      </div>
+      <div class="row">
+          <div class="file-field input-field col m6 offset-m3">
+              <div class="btn">
+                <span>BG Image</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+      </div>
+      <div class="row">
+          <div class="col m6 offset-m3">
+               <input type="date" class="datepicker" placeholder="choose a complete time">
+          </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m6 center offset-m3">
+          <input id="fundinggoal" type="number" class="validate" placeholder="$100">
+          <label for="fundinggoal">Funding Goal</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m6 center offset-m3">
+          <input id="introvideo" type="number" class="validate">
+          <label for="introvideo">Introduction Video</label>
+        </div>
+      </div>
+      <div class="row">
+          <a href="" class="btn col m4 center offset-m4">Preview</a>
+      </div>
+        <br><br>
+      <div class="row">
+          <input type="submit" value="Submit" class="btn col m4 center offset-m4">
+      </div>
+    </form>
+</div>
+<script>
+     $(document).ready(function() {
+        $('select').material_select();
+         $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 17 // Creates a dropdown of 15 years to control year
+          });
+  });
+</script>
+{% endblock %}

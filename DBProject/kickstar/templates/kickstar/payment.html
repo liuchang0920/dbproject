@@ -1,0 +1,75 @@
+{% extends 'kickstar/base.html' %}
+
+{% load static %}
+
+{% block main-content %}
+
+
+<div class="row">
+    <div class="col m12 center-align red lighten-5">
+        <br>
+        <h4>  Project Name </h4>
+        <span class="grey-text small">by John Wall</span>
+        <br><p></p><br>
+    </div>
+</div>
+    <br>
+<div class="row">
+<div class="col m10 offset-m2">
+    <div class="col m4">
+        <h5>Support this Project</h5>
+    </div>
+</div>
+<div class="col m10 offset-m2">
+    <div class="col m7">
+          <ul class="collection">
+            <li class="collection-item avatar">
+                <br>
+                <span>Existing Card</span>
+                <form class="row">
+                    <input type="text" class="input-field col m6 offset-m2" placeholder="cardname" size="50" value="123456">
+
+                    <input type="text" class="input-field col m3 offset-m2" placeholder="valid through" value="12/19">
+                    <input type="text" class="input-field col m2 offset-m1" placeholder="sc" value="123">
+
+                    <a href="" type="submit"><i class="fa fa-credit-card-alt fa-3x right" style="margin-right: 60px; color: #26a69a;"  alt="pledge this project"></i></a>
+                </form>
+            </li>
+
+              <!--use another-->
+            <li class="collection-item avatar">
+                <br>
+                <span>Use New Card</span>
+                <form class="row">
+                    <input type="text" class="input-field col m6 offset-m2" placeholder="card name" size="50" value="123456">
+
+                    <input type="text" class="input-field col m3 offset-m2" placeholder="MM/YY" value="12/19">
+                    <input type="text" class="input-field col m2 offset-m1" placeholder="sc" value="123">
+
+                    <a href="" type="submit"><i class="fa fa-credit-card-alt fa-3x right" style="margin-right: 60px; color: #26a69a;"  alt="pledge this project"></i></a>
+                </form>
+            </li>
+
+          </ul>
+    </div>
+    <div class="col m3 ">
+        <div class="card">
+            <div class="container">
+                <div class="card-title">
+                    <small>pledge amount</small>
+                    <br>
+                    <b>$ 100 </b>
+                    <div class="divider">
+
+                    </div>
+                    <h6 class="grey-text">selected reward</h6>
+                        <h6>I just want to help the project</h6>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

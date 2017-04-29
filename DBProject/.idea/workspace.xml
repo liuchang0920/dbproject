@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="footer.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="footer.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/footer.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="48" lean-forward="false" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
+            <state relative-caret-position="285">
+              <caret line="19" column="15" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="19" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -98,7 +98,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="updateproject.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="updateproject.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/updateproject.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="295">
@@ -162,12 +162,12 @@
         <option value="$PROJECT_DIR$/kickstar/admin.py" />
         <option value="$PROJECT_DIR$/DBProject/settings.py" />
         <option value="$PROJECT_DIR$/kickstar/models.py" />
-        <option value="$PROJECT_DIR$/kickstar/templates/kickstar/footer.html" />
         <option value="$PROJECT_DIR$/kickstar/templates/kickstar/payment.html" />
         <option value="$PROJECT_DIR$/kickstar/views.py" />
         <option value="$PROJECT_DIR$/kickstar/url.py" />
         <option value="$PROJECT_DIR$/kickstar/templates/kickstar/startproject.html" />
         <option value="$PROJECT_DIR$/kickstar/templates/kickstar/updateproject.html" />
+        <option value="$PROJECT_DIR$/kickstar/templates/kickstar/footer.html" />
       </list>
     </option>
   </component>
@@ -947,14 +947,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/footer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="48" lean-forward="false" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/header.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1020,6 +1012,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="295">
           <caret line="25" column="17" lean-forward="false" selection-start-line="22" selection-start-column="9" selection-end-line="25" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="15" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="19" selection-end-column="15" />
           <folding />
         </state>
       </provider>

@@ -1,14 +1,45 @@
-from django.shortcuts import render
-
-# Create your views here.
-
+from django.shortcuts import render, redirect
+from .models import *
+from .forms import *
 
 def index(request):
     return render(request, 'kickstar/index.html', {})
 
 
 def login(request):
-    return render(request, 'kickstar/login.html', {})
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        print username, password
+        if username == '' or password == '':
+            message = "username or password cannot be empty"
+            print "fail empty"
+            return render(request, 'kickstar/login.html', {'message': message})
+        else:
+            try:
+                user = User.objects.get(username=username)
+                login = Logon.objects.get(user=user, password=password)
+                #put into session
+                print "success"
+                request.session["username"] = username
+                message = "login Successful"
+                return render(request, 'kickstar/index.html', {'message': message})
+            except:
+                message = "username or password wrong"
+
+                return render(request, 'kickstar/login.html', {'message': message})
+                print "success"
+
+                return redirect('kickstar/')
+    else:
+        print "get"
+        return render(request, 'kickstar/login.html', {})
+
+
+def logout(request):
+    request.session["username"] = None
+    message = "successfully logout"
+    return render(request, 'kickstar/index.html', {'message': message})
 
 
 def register(request):
@@ -43,3 +74,10 @@ def startproject(request):
 def updateproject(reqeust):
     return render(reqeust, 'kickstar/updateproject.html', {})
 
+
+def test(request):
+    return render(request, 'kickstar/test.html', {"message":"this is a test"})
+
+
+def search(request):
+    render(request, 'kickstar/test.html', {"message":"this is a test"})

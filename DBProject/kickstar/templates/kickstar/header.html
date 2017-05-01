@@ -16,7 +16,8 @@
     <li><a>Category</a></li>
     <li><a>Start a project</a></li>
     <li>
-          <!-- Dropdown Trigger -->
+        {% if request.session.username %}
+           <!-- Dropdown Trigger -->
           <a class='dropdown-button btn' href='#' data-activates='dropdown1'>John Wall</a>
 
           <!-- Dropdown Structure -->
@@ -26,9 +27,11 @@
             <li><a href="#!">Activities</a></li>
             <li class="divider"></li>
             <li><a href="">Profile</a></li>
-              <li><a href="" class=" red lighten-2">Log out</a></li>
-
+              <li><a href="{% url 'kickstar:logout' %}" class=" red lighten-2">Log out</a></li>
           </ul>
+        {% else %}
+          <li><a href="{% url 'kickstar:login' %}" class="btn">Please Login</a></li>
+        {% endif %}
     </li>
   </ul>
 </div>

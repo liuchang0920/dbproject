@@ -15,4 +15,6 @@ urlpatterns = [
     url(r'^payment', views.payment, name='payment'),
     url(r'^startproject', views.startproject, name='startproject'),
     url(r'^updateproject', views.updateproject, name='updateproject'),
+    url(r'^test', views.test, name='test'),
+    url(r'^logout', views.logout, name='logout'),
 ]

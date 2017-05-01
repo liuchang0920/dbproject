@@ -10,7 +10,7 @@
           <a class="btn waves-effect white grey-text darken-text-2" href="{% url 'kickstar:category' %}">See All Category</a>
         </div>
           {% for item in newest_project %}
-              <div class="carousel-item red white-text" href="#one!">
+              <div class="carousel-item white-text" href="#one!" style="background: url({% static item.pbackgroundpic %}) ">
                   <h2>{{ item.pname }}</h2>
                   <p class="white-text">{{ item.pdescription }}</p>
               </div>

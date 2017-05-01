@@ -6,11 +6,8 @@ from .forms import *
 def index(request):
     # fetch featured five projects
     newest_project = Projectpropose.objects.order_by('-pstarttime')[:5]
+    print len(newest_project)
 
-    for item in newest_project:
-        pic = Projectsample.objects.filter(project=item)[0]
-        print pic
-        item.pic = pic
     return render(request, 'kickstar/index.html', {'newest_project': newest_project})
 
 
@@ -56,7 +53,11 @@ def activity(request):
 
 # should be post
 def profile(request):
-    return render(request, 'kickstar/profile.html', {})
+    username = request.session['username']
+    print username
+    user = User.objects.get(username = username)
+
+    return render(request, 'kickstar/profile.html', {'user': user})
 
 
 def project(request):
@@ -96,3 +97,7 @@ def category_detail(request, categoryid):
     category = get_object_or_404(Category, categoryid=categoryid)
     related_project = Projectpropose.objects.filter(category=category)
     return render(request, 'kickstar/cateogrydetail.html', {'related_project': related_project, 'category': category})
+
+
+# def save_profile(request):
+#     pass

@@ -13,45 +13,46 @@
 </ul>
 <div id="account" class="col m8 offset-m1">
     <br><br>
-     <form class="col m8 offset-m1">
+     <form class="col m8 offset-m1" method="post" action="{% url 'kickstar:saveprofile' %}">
           <div class="row">
             <div class="input-field col s6">
-              <input id="email" type="email" class="validate">
+              <input id="email" type="email" class="validate" value="{{ user.email }}">
               <label for="email">Email</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s3">
-              <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+              <input id="first_name" type="text" class="validate" value="{{ user.firstname }}">
               <label for="first_name">First Name</label>
             </div>
             <div class="input-field col s3">
-              <input id="last_name" type="text" class="validate">
+              <input id="last_name" type="text" class="validate" value="{{ user.lastname }}">
               <label for="last_name">Last Name</label>
             </div>
           </div>
-          <div class="row">
-            <div class="input-field col s6">
-              <input id="password" type="password" class="validate">
-              <label for="password">Password</label>
-            </div>
-          </div>
+{#         get to another div: say security #}
+{#          <div class="row">#}
+{#            <div class="input-field col s6">#}
+{#              <input id="password" type="password" class="validate" placeholder="{{ user.password }}">#}
+{#              <label for="password">Password</label>#}
+{#            </div>#}
+{#          </div>#}
+{#         <div class="row">#}
+{#            <div class="input-field col s6">#}
+{#              <input id="passwordR" type="password" class="validate">#}
+{#              <label for="passwordR">Repeat Password</label>#}
+{#            </div>#}
+{#         </div>#}
          <div class="row">
             <div class="input-field col s6">
-              <input id="passwordR" type="password" class="validate">
-              <label for="passwordR">Repeat Password</label>
-            </div>
-         </div>
-         <div class="row">
-            <div class="input-field col s6">
-              <input id="Hometown" type="text" class="validate">
+              <input id="Hometown" type="text" class="validate" value="{{ user.hometown }}">
               <label for="Hometown">Hometown</label>
             </div>
          </div>
          <div class="row">
             <div class="input-field col s6">
-              <input id="Hometown" type="text" class="validate">
-              <label for="Hometown">Interests <span class="text-grey small">(separate with ',')</span></label>
+              <input id="interest" type="text" class="validate" value="{{ user.interests }}">
+              <label for="interest">Interests <span class="text-grey small">(separate with ',')</span></label>
             </div>
          </div>
 

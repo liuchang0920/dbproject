@@ -94,6 +94,7 @@ class Projectpropose(models.Model):
     plancompletetime = models.DateTimeField()
     actualcompletetime = models.DateTimeField(blank=True, null=True)
     pstatus = models.CharField(max_length=10)
+    pbackgroundpic = models.CharField(max_length=200, blank=True, null=True)
 
     class Meta:
         db_table = 'projectPropose'

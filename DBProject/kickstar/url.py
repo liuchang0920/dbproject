@@ -19,4 +19,5 @@ urlpatterns = [
     url(r'^logout/', views.logout, name='logout'),
     url(r'^category/$', views.category, name='category'),
     url(r'^category/(?P<categoryid>[a-zA-Z0-9]+)/$', views.category_detail, name='categorydetail'),
+    # url(r'^saveprofile/$', views.save_profile, name='saveprofile')
 ]

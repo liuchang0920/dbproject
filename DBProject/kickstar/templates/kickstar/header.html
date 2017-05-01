@@ -13,8 +13,8 @@
 <a href="#!" class="brand-logo">Kick Star</a>
 
   <ul class="right hide-on-med-and-down">
-    <li><a>Category</a></li>
-    <li><a>Start a project</a></li>
+    <li><a href="{% url 'kickstar:category' %}">Category</a></li>
+    <li><a href="{% url 'kickstar:startproject' %}">Start a project</a></li>
     <li>
         {% if request.session.username %}
            <!-- Dropdown Trigger -->

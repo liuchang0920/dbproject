@@ -98,6 +98,9 @@ class Projectpropose(models.Model):
     class Meta:
         db_table = 'projectPropose'
 
+    def __str__(self):
+        return self.pname
+
 
 class Projectrate(models.Model):
     project = models.ForeignKey('Projectpropose', on_delete=models.CASCADE)
@@ -118,6 +121,9 @@ class Projectsample(models.Model):
     class Meta:
         db_table = 'projectSample'
         unique_together = (('project', 'url'),)
+
+    def __str__(self):
+        return self.project.pname+ "/"+ self.type + "/" + self.url
 
 
 class Projectupdate(models.Model):

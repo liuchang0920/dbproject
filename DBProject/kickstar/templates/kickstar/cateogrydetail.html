@@ -1,0 +1,37 @@
+{% extends 'kickstar/base.html' %}
+
+{% load static %}
+
+{% block main-content %}
+<!--category detail-->
+      <div class="container">
+          <div class="row">
+                <h4 class="col m6">{{ category.cname }}</h4>
+          </div>
+          <div class="row">
+            {% if related_project|length != 0 %}
+                {% for item in related_project %}
+                    <div class="col s12 m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="{% static 'kickstar/images/sample-1.jpg' %}">
+                          <span class="card-title">{{ item.pname }}</span>
+                        </div>
+                        <div class="card-content">
+                          <p>{{ item.pdescription }}</p>
+                        </div>
+                        <div class="card-action">
+                          <a href="{% url 'kickstar:project' %}">more</a>
+                        </div>
+                      </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="row">
+                    <span>Sorry, there are no project in {{ category.cname }} so far.</span>
+                </div>
+            {% endif %}
+          </div>
+      </div>
+    <br>
+{% endblock %}

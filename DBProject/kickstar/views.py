@@ -1,9 +1,17 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
 
+
 def index(request):
-    return render(request, 'kickstar/index.html', {})
+    # fetch featured five projects
+    newest_project = Projectpropose.objects.order_by('-pstarttime')[:5]
+
+    for item in newest_project:
+        pic = Projectsample.objects.filter(project=item)[0]
+        print pic
+        item.pic = pic
+    return render(request, 'kickstar/index.html', {'newest_project': newest_project})
 
 
 def login(request):
@@ -13,7 +21,6 @@ def login(request):
         print username, password
         if username == '' or password == '':
             message = "username or password cannot be empty"
-            print "fail empty"
             return render(request, 'kickstar/login.html', {'message': message})
         else:
             try:
@@ -26,11 +33,8 @@ def login(request):
                 return render(request, 'kickstar/index.html', {'message': message})
             except:
                 message = "username or password wrong"
-
                 return render(request, 'kickstar/login.html', {'message': message})
-                print "success"
 
-                return redirect('kickstar/')
     else:
         print "get"
         return render(request, 'kickstar/login.html', {})
@@ -80,4 +84,15 @@ def test(request):
 
 
 def search(request):
-    render(request, 'kickstar/test.html', {"message":"this is a test"})
+    return render(request, 'kickstar/test.html', {"message":"this is a test"})
+
+
+def category(request):
+    category = Category.objects.all()
+    return render(request, 'kickstar/cateogry.html', {'category': category})
+
+
+def category_detail(request, categoryid):
+    category = get_object_or_404(Category, categoryid=categoryid)
+    related_project = Projectpropose.objects.filter(category=category)
+    return render(request, 'kickstar/cateogrydetail.html', {'related_project': related_project, 'category': category})

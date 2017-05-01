@@ -1,0 +1,39 @@
+{% extends 'kickstar/base.html' %}
+
+{% load static %}
+
+{% block main-content %}
+<!--category detail-->
+      <div class="container">
+          <div class="row">
+                <h4 class="col m6">Category</h4>
+          </div>
+      <div>
+      </div>
+          <div class="row">
+            {% if category|length != 0 %}
+                {% for item in category %}
+                    <div class="col s12 m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="{% static 'kickstar/images/sample-1.jpg' %}">
+                          <span class="card-title">{{ item.cname }}</span>
+                        </div>
+                        <div class="card-content">
+                          <p>{{ item.cdescription }}</p>
+                        </div>
+                        <div class="card-action">
+                          <a href="{% url 'kickstar:categorydetail'  item.categoryid  %}">see Detail</a>
+                        </div>
+                      </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="row">
+                    <span>Sorry, there are no category so far.</span>
+                </div>
+            {% endif %}
+          </div>
+      </div>
+    <br>
+{% endblock %}

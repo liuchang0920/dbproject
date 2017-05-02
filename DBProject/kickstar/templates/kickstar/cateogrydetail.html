@@ -21,7 +21,7 @@
                           <p>{{ item.pdescription }}</p>
                         </div>
                         <div class="card-action">
-                          <a href="{% url 'kickstar:project' %}">more</a>
+                          <a href="{% url 'kickstar:project' item.pk %}">more</a>
                         </div>
                       </div>
                     </div>

@@ -3,17 +3,23 @@
 {% load static %}
 
 {% block main-content %}
-
+<style>
+    .collection-item  > div {
+        padding-bottom: 7%;
+    }
+</style>
 <div class="container">
 <h3>Profile</h3>
 <ul id="tabs-swipe-demo" class="tabs">
     <li class="tab col s3"><a class="active" href="#account">Account</a></li>
     <li class="tab col s3"><a  href="#following">Following</a></li>
     <li class="tab col s3"><a  href="#payment">Payment Methods</a></li>
+    <li class="tab col s3"><a  href="#security">Security</a></li>
 </ul>
 <div id="account" class="col m8 offset-m1">
     <br><br>
      <form class="col m8 offset-m1" method="post" action="{% url 'kickstar:saveprofile' %}">
+          {% csrf_token %}
           <div class="row">
             <div class="input-field col s6">
               <input id="email" type="email" class="validate" value="{{ user.email }}">
@@ -65,33 +71,33 @@
     <br><br>
 <div class="row">
     <div class="col s4 m4">
-        <div class="card">
-            <div class="card-title">
+        <div class="">
+            <h4 class="">
                 Following
-            </div>
-            <div class="col m12 card-content">
+            </h4>
+            <div class="col m12">
               <ul class="collection ">
-                <li class="collection-item "><div style="padding-bottom: 4%;">Alvin<a href="#!" class="secondary-content  btn ">follow</a></div></li>
-                <li class="collection-item "><div  style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
-                <li class="collection-item "><div  style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
-                <li class="collection-item "><div style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content  btn ">follow</a></div></li>
-                <li class="collection-item "><div  style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
-                <li class="collection-item "><div  style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
+                <li class="collection-item "><div >Alvin<a href="#!" class="secondary-content  btn ">follow</a></div></li>
+                <li class="collection-item "><div >Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
+                <li class="collection-item "><div>Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
+                <li class="collection-item "><div >Alvin<a href="#!" class="secondary-content  btn ">follow</a></div></li>
+                <li class="collection-item "><div  >Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
+                <li class="collection-item "><div  >Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
 {#                <li class="collection-item "><div>Alvin</div></li>#}
               </ul>
             </div>
         </div>
     </div>
     <div class="col s4 m4">
-        <div class="card">
-            <div class="card-title">
+        <div class="">
+            <h4 class="">
                 Followed
-            </div>
-            <div class="col m12 card-content">
+            </h4>
+            <div class="col m12 ">
               <ul class="collection ">
-                     <li class="collection-item "><div style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content  btn red">unfollow</a></div></li>
-                <li class="collection-item "><div  style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content btn red">unfollow</a></div></li>
-                <li class="collection-item "><div  style="padding-bottom: 4%">Alvin<a href="#!" class="secondary-content btn red">unfollow</a></div></li>
+                <li class="collection-item "><div >Alvin<a href="#!" class="secondary-content  btn red">unfollow</a></div></li>
+                <li class="collection-item "><div  >Alvin<a href="#!" class="secondary-content btn red">unfollow</a></div></li>
+                <li class="collection-item "><div  >Alvin<a href="#!" class="secondary-content btn red">unfollow</a></div></li>
 {#                <li class="collection-item "><div>Alvin</div></li>#}
               </ul>
             </div>
@@ -100,56 +106,109 @@
 </div>
 </div>
 <div id="payment" class="col s12 ">
-    <div class="col m4">
+    <br><br>
+    <h4>Creditcard Information</h4>
+    <div class="col m9">
         <div class="row">
-            <div class="card col m4">
-                <div class="card-title">
-                    Credit card
-                </div>
-                <div class="card-content">
-                    <div><span>card number</span> 1234566789</div>
-                    <div><span>valid through</span> 09/17</div>
-                    <div><span>Security code</span> 123</div>
-                </div>
-            </div>
-            <div class="card col m4">
-                <div class="card-title">
-                    Credit card
-                </div>
-                <div class="card-content">
-                    <div><span>card number</span> 1234566789</div>
-                    <div><span>valid through</span> 09/17</div>
-                    <div><span>Security code</span> 123</div>
-                </div>
-            </div>
+{#            <div class="card col m4">#}
+{#                <div class="card-title">#}
+{#                    Credit card#}
+{#                </div>#}
+{#                <div class="card-content">#}
+{#                    <div><span>card number</span> 1234566789</div>#}
+{#                    <div><span>valid through</span> 09/17</div>#}
+{#                    <div><span>Security code</span> 123</div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="card col m4">#}
+{#                <div class="card-title">#}
+{#                    Credit card#}
+{#                </div>#}
+{#                <div class="card-content">#}
+{#                    <div><span>card number</span> 1234566789</div>#}
+{#                    <div><span>valid through</span> 09/17</div>#}
+{#                    <div><span>Security code</span> 123</div>#}
+{#                </div>#}
+{#            </div>#}
+
+                {% if creditcards %}
+                   {% for item in creditcards %}
+                       <div class="card col m4">
+                        <div class="card-title">Creditcard</div>
+                        <div class="card-content">
+                            <div class="row">
+                                <form class="col s12" action="{% url 'kickstar:savecreditcard' %}" method="post">
+                                    {% csrf_token %}
+                                  <div class="row">
+                                    <div class="input-field col s12">
+                                      <input name="cardnumber" id="cardnumber" type="text" class="validate" value="{{ item.creditno }}">
+                                      <label for="cardnumber">Card Number</label>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="input-field col s12">
+                                      <input name="cardname" id="cardname" type="text" class="validate" value="{{ item.creditname }}">
+                                      <label for="cardname">Card Name</label>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="input-field col s6">
+                                      <input name="validthrough" id="validthrough" type="text" class="validate" value="{{ item.validdate|date:"m/Y" }}">
+                                      <label for="validthrough">Valid (MM/YY)</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                      <input name="securitycode" id="securitycode" type="text" class="validate" value="{{ item.securitycode }}">
+                                      <label for="securitycode">Security Code</label>
+                                    </div>
+                                  </div>
+                                   <div class="input-field col s6" style="display: none;">
+                                      <input  name="pk" id="pk" type="text" class="validate" value="{{ item.pk }}">
+                                    </div>
+                                  <div class="row">
+                                      <input class="btn red lighten-3" type="submit" value="Save">
+                                  </div>
+                                </form>
+                              </div>
+                        </div>
+                       </div>
+                   {% endfor %}
+                {% else %}
+                    <span>You can add creditcard in the below input box</span>
+                {% endif %}
+
         </div>
         <div class="row">
             <div class="card col m4">
                 <div class="card-title">Add Card</div>
                 <div class="card-content">
                     <div class="row">
-                        <form class="col s12">
+                        <form class="col s12" action="{% url 'kickstar:savecreditcard' %}" method="post">
+                              {% csrf_token %}
                           <div class="row">
                             <div class="input-field col s12">
-                              <input id="cardnumber" type="text" class="validate">
+                              <input name="cardnumber" id="cardnumber" type="text" class="validate">
                               <label for="cardnumber">Card Number</label>
                             </div>
                           </div>
                           <div class="row">
                             <div class="input-field col s12">
-                              <input id="cardname" type="text" class="validate">
+                              <input name="cardname" id="cardname" type="text" class="validate">
                               <label for="cardname">Card Name</label>
                             </div>
                           </div>
                           <div class="row">
                             <div class="input-field col s6">
-                              <input id="validthrough" type="text" class="validate">
-                              <label for="validthrough">Valid (MM/YY)</label>
+                              <input name="validthrough" id="validthrough" type="date" class="datepicker">
+                              <label for="validthrough">(MM/YY)</label>
                             </div>
                             <div class="input-field col s6">
-                              <input id="securitycode" type="text" class="validate">
+                              <input name="securitycode" id="securitycode" type="text" class="validate">
                               <label for="securitycode">Security Code</label>
                             </div>
+                              <div class="input-field col s6" style="display: none;">
+                                  <input name='pk' id="pk" type="text" class="validate" value="newcard">
+
+                                </div>
                           </div>
                           <div class="row">
                               <input class="btn red lighten-3" type="submit" value="Submit">
@@ -159,8 +218,50 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
+<!--reset password-->
+<div id="security" class="col m8 offset-m1">
+    <br><br>
+     <form class="col m8 offset-m1" method="post" action="{% url 'kickstar:savepassword' %}">
+{#         get to another div: say security #}
+          {% csrf_token %}
+         <div class="row">
+            <div class="input-field col s6">
+              <input name="originalpassword" id="originalpassword" type="password" class="validate" placeholder="{{ user.password }}">
+              <label for="password">Original Password</label>
+            </div>
+         </div>
+         <div class="row">
+            <div class="input-field col s6">
+              <input name="password" id="password" type="password" class="validate" placeholder="{{ user.password }}">
+              <label for="password">Password</label>
+            </div>
+         </div>
+         <div class="row">
+            <div class="input-field col s6">
+              <input name="passwordR" id="passwordR" type="password" class="validate">
+              <label for="passwordR">Repeat Password</label>
+            </div>
+         </div>
+         <input type="submit" class="btn red lighten-2"  value="Save Settings"/>
+     </form>
+    <br><br>
+  </div>
 </div>
+<script>
+     $(document).ready(function() {
+        $('select').material_select();
+         $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 17, // Creates a dropdown of 15 years to control year
+            format: 'mm/yyyy'
+          });
+  });
+</script>
+{% if message %}
+  <script>
+         Materialize.toast('{{ message }}', 4000);
+  </script>
+{%  endif %}
 {% endblock %}

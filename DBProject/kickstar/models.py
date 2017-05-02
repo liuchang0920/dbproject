@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 class Category(models.Model):
@@ -95,6 +96,7 @@ class Projectpropose(models.Model):
     actualcompletetime = models.DateTimeField(blank=True, null=True)
     pstatus = models.CharField(max_length=10)
     pbackgroundpic = models.CharField(max_length=200, blank=True, null=True)
+    pcontentdetail = RichTextField(blank=True, null=True)
 
     class Meta:
         db_table = 'projectPropose'
@@ -138,6 +140,9 @@ class Projectupdate(models.Model):
         db_table = 'projectUpdate'
         unique_together = (('project', 'updatenumber'),)
 
+    def __str__(self):
+        return self.project.pname + " " + str(self.updatenumber)
+
 
 class User(models.Model):
     username = models.CharField(primary_key=True, max_length=50)
@@ -157,6 +162,7 @@ class User(models.Model):
 
 class Usercreditcardinfo(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
+    creditname = models.CharField(max_length=50, blank=True, null=True)
     creditno = models.CharField(max_length=50)
     validdate = models.DateField()
     securitycode = models.CharField(max_length=10)
@@ -164,3 +170,6 @@ class Usercreditcardinfo(models.Model):
     class Meta:
         db_table = 'userCreditcardInfo'
         unique_together = (('user', 'creditno'),)
+
+    def __str__(self):
+        return self.user.username + " " + self.creditno

@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
+import datetime
+from django.core import serializers
 
 
 def index(request):
@@ -54,14 +56,20 @@ def activity(request):
 # should be post
 def profile(request):
     username = request.session['username']
-    print username
     user = User.objects.get(username = username)
+    # user creditcard info
+    creditcards = Usercreditcardinfo.objects.filter(user=user)
+    print "credit card size:%d" % (len(creditcards))
 
-    return render(request, 'kickstar/profile.html', {'user': user})
+    return render(request, 'kickstar/profile.html', {'user': user, 'creditcards': creditcards})
 
 
-def project(request):
-    return render(request, 'kickstar/project.html', {})
+def project(request, pk):
+    project = get_object_or_404(Projectpropose, pk=pk)
+    project_updates = Projectupdate.objects.filter(project = project).order_by('-updatenumber')
+    project_comments = Comment.objects.filter(project=project).order_by('-commenttime')
+
+    return render(request, 'kickstar/project.html', {'project': project, 'project_updates': project_updates, 'project_comments': project_comments})
 
 
 def back_project(request):
@@ -99,5 +107,102 @@ def category_detail(request, categoryid):
     return render(request, 'kickstar/cateogrydetail.html', {'related_project': related_project, 'category': category})
 
 
-# def save_profile(request):
-#     pass
+def save_profile(request):
+    return render(request, 'kickstar/test.html', {})
+
+
+def project_comment(request):
+    if request.method == 'POST':
+        username = request.session['username']
+        print username
+        user = User.objects.get(username=username)
+        content = request.POST.get("content")
+        print content
+        pk = request.POST["pk"]
+        project = Projectpropose.objects.get(pk=pk)
+        comment = Comment(project=project, username=user, content=content, commenttime=datetime.datetime.now())
+        comment.save()
+        #return render(request, 'kickstar/test.html', {})
+        return redirect('kickstar:project', pk=pk)
+
+
+def save_password(request):
+    # check password correct or not
+    username = request.session.get("username")
+    originalpassword = request.POST.get("originalpassword")
+    print originalpassword
+    message = 'password successfully updated'
+    try:
+        user = User.objects.get(username=username)
+        loginuser = Logon.objects.get(user=user, password=originalpassword)
+        newpassword = request.POST.get("password")
+        newpasswordR = request.POST.get("passwordR")
+
+        if newpassword == newpasswordR:
+            #update
+            loginuser.password = newpassword
+            loginuser.save()
+        else:
+            # error message
+            message = "new password doesn't match"
+    except:
+        message = 'original password not correct'
+    finally:
+        username = request.session['username']
+        user = User.objects.get(username=username)
+        creditcards = Usercreditcardinfo.objects.filter(user=user)
+        context = {'user': user, 'creditcards': creditcards}
+        if message != '':
+            context['message'] = message
+        return render(request, 'kickstar/profile.html', context)
+
+
+def save_creditcard_info(request):
+    # create user
+    username = request.session['username']
+    user = User.objects.get(username=username)
+    message = ''
+    try:
+        pk = request.POST['pk']
+        cardnumber = request.POST['cardnumber']
+        cardname = request.POST['cardname']
+        validthrough = str(request.POST['validthrough'])
+        print "valid: ", validthrough
+        month = int(validthrough.split('/')[0])
+
+        year = int(validthrough.split('/')[1])
+        validdate = datetime.datetime(year, month, 1)
+        print validthrough
+        securitycode = request.POST['securitycode']
+
+        if cardnumber == '' or cardname == '' or validthrough == '' or securitycode == '':
+            message = 'all the fields must not be empty'
+
+        if pk != 'newcard':
+            # modification
+            creditcarinfo = Usercreditcardinfo.objects.get(pk=pk)
+            creditcarinfo.creditno = cardnumber
+            creditcarinfo.creditname = cardname
+            creditcarinfo.validdate = validdate  # date???
+            creditcarinfo.securitycode = securitycode
+            creditcarinfo.save()
+            message = 'creditcard info updated successfully'
+        else:
+            creditcarinfo = Usercreditcardinfo()
+            creditcarinfo.user = user
+            creditcarinfo.creditno = cardnumber
+            creditcarinfo.creditname = cardname
+            creditcarinfo.validdate = validdate
+            creditcarinfo.securitycode = securitycode
+            creditcarinfo.save()
+            message = 'creditcard info created successfully'
+
+    except:
+        message = 'error occurrd, do not leave blank'
+    finally:
+        creditcards = Usercreditcardinfo.objects.filter(user=user)
+        context = {'user': user, 'creditcards': creditcards}
+        if message != '':
+            context['message'] = message
+        return render(request, 'kickstar/profile.html', context)
+

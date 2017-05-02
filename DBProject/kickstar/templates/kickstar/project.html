@@ -3,21 +3,31 @@
 {% load static %}
 
 {% block main-content %}
-
+<!--share button-->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=727244590785229";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
 <div class="container">
   <div class="row">
     <div class="col m2">
-        <div class="card">
-            John Wall
-        </div>
-        <div class="card-content">
+        <h4 class="">
+            {{ project.user.username }}
+        </h4>
+        <div class="">
             <div>3 created</div>
-            <div><button href="" >follow</button></div>
+            <br>
+            <div><button href="" class="btn red lighten-3">follow</button></div>
         </div>
     </div>
     <div class="col m8 offset-m1">
-        <h3>Project Name</h3>
-        <p>this should be the project description</p>
+        <h3>{{ project.pname }}</h3>
+        <p>{{ project.pdescription }}</p>
     </div>
   </div>
   <div class="row">
@@ -27,23 +37,23 @@
         </div>
     </div>
       <div class="col m4" >
-          <big><i class="fa fa-usd" aria-hidden="true"></i>10000</big>
-          <small class="grey-text">pledged for <i class="fa fa-usd" aria-hidden="true"></i>100000</small>
-          <p><big>1000</big> Backers</p>
-          <p><big>30</big> Days to go</p>
+          <big><i class="fa fa-usd" aria-hidden="true"></i>{{ project.maxbudget }}</big>
+          <small class="grey-text">pledged for <i class="fa fa-usd" aria-hidden="true"></i>{{ project.amountpledged }}</small>
+          <p><big>{{ project.backcount }}</big> Backers</p>
+          <p> <small><span class="grey-text">plan complete time</span> {{ project.plancompletetime }}</small> </p>
           <a href="" class="btn col m12">Back this project</a>
 
           <a href="" class="btn col m6 white"><span class="black-text"><i class="fa fa-star" aria-hidden="true"></i>Save</span></a>
-          <a href="" class="btn col m6 white"><span class="black-text"><i class="fa fa-share" aria-hidden="true"></i>Share</span></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="btn col m6 white"><span class="black-text"><i class="fa fa-share" aria-hidden="true"></i>Share</span></a>
       </div>
   </div>
   <div class="row">
-      <ul id="tabs-swipe-demo" class="tabs col offset-m1">
+      <ul id="tabs-swipe-demo" class="tabs col offset-m2">
         <li class="tab col s3"><a class="active" href="#campaign">Campaign</a></li>
         <li class="tab col s3"><a href="#updates">Updates</a></li>
         <li class="tab col s3"><a   href="#comments">Comments</a></li>
       </ul>
-      <div id="campaign" class="col m12 offset-m1">
+      <div id="campaign" class="col m12 offset-m2">
             <h3 class="normal mb3 mb7-sm mobile-hide">
             About this project
             </h3>
@@ -96,74 +106,104 @@
             </div>
 
       </div>
-      <div id="updates" class="col m12 offset-m1">
+      <div id="updates" class="col m12 offset-m2">
           <br><br>
-          <div class="col m10">
-            <div class="col m3">
-                <span class=" btn-flat disabled">2017 April 7</span>
-            </div>
-            <div class="col m7 ">
-                <blockquote>
-                    Project Progress day3
-                    sdfasdfafsdfsadfdddddddddddddddddddddddddddddddd
-                    <br>sdfasdf
-                    df
-                </blockquote>
-            </div>
-          </div>
+{#          <div class="col m10">#}
+{#            <div class="col m3">#}
+{#                <span class=" btn-flat disabled">2017 April 7</span>#}
+{#            </div>#}
+{#            <div class="col m7 ">#}
+{#                <blockquote>#}
+{#                    Project Progress day3#}
+{#                    sdfasdfafsdfsadfdddddddddddddddddddddddddddddddd#}
+{#                    <br>sdfasdf#}
+{#                    df#}
+{#                </blockquote>#}
+{#            </div>#}
+{#          </div>#}
 
-          <div class="col m10">
-            <div class="col m3">
-                <span class=" btn-flat disabled">2017 April 1</span>
-            </div>
-            <div class="col m7 ">
-                <blockquote>
-                    Project Progress day1
-                    just started
-                    <br>sdfasdf
-                    df
-                </blockquote>
-            </div>
-          </div>
-
+         {% if project_updates %}
+             {% for item in project_updates %}
+                  <div class="col m10">
+                    <div class="col m3">
+                        <span class=" btn-flat disabled" style="padding-top: 10%">{{ item.postdate }}</span>
+                    </div>
+                    <div class="col m7 ">
+                        <blockquote>
+                            <h5>{{ item.title }}</h5>
+                            <br>
+                            <div>
+                                {{ item.body }}
+                            </div>
+                        </blockquote>
+                    </div>
+                  </div>
+             {% endfor %}
+         {% else %}
+             <span>Sorry, there is no update so far.</span>
+         {% endif %}
       </div>
-      <div id="comments" class="col m12 offset-m1">
+      <div id="comments" class="col m12 offset-m2">
           <br><br>
-          <div class="col m10">
-            <div class="col m3">
-                <span class=" btn-flat disabled">John Wall</span>
-            </div>
-            <div class="col m7 ">
-                <blockquote>
-                   <span class="chip">
-                       @Amy
-                   </span>
-                   <span>  this is a great idea. hope this project works</span>
-                   <br>
-                    <span class="right grey-text">Aprl 1</span>
-                </blockquote>
-            </div>
-          </div>
-          <div class="col m10">
-            <div class="col m3">
-                <span class=" btn-flat disabled">John Wall</span>
-            </div>
-            <div class="col m7 ">
-                <blockquote>
-                   <span class="chip">
-                       @Amy
-                   </span>
-                   <span>  this is a great idea. hope this project works</span>
-                   <br>
-                    <span class="right grey-text">Aprl 1</span>
-                </blockquote>
-            </div>
-          </div>
+{#          <div class="col m10">#}
+{#            <div class="col m3">#}
+{#                <span class=" btn-flat disabled">John Wall</span>#}
+{#            </div>#}
+{#            <div class="col m7 ">#}
+{#                <blockquote>#}
+{#                   <span class="chip">#}
+{#                       @Amy#}
+{#                   </span>#}
+{#                   <span>  this is a great idea. hope this project works</span>#}
+{#                   <br>#}
+{#                    <span class="right grey-text">Aprl 1</span>#}
+{#                </blockquote>#}
+{#            </div>#}
+{#          </div>#}
+            <!--comment input-->
+          <form action="{% url 'kickstar:projectcomment' %}" method="post">
+               {% csrf_token %}
+              <div class="row">
+                <div class="input-field col s6">
+                    <textarea id="content" name="content" type="text" class="materialize-textarea validate" placeholder="@username to mention"></textarea>
+                    <label class="active" for="comment">write your comment</label>
+                </div>
+                <div class="col s3">
+                  <input type="submit" value="comment" class="btn">
+                </div>
+                    <div style="display: none;">
+                        <input type="text" value="{{ project.pk }}" name="pk">
+                    </div>
+              </div>
 
-      </div>
-
+          </form>
+            {% if project_comments %}
+                {% for item in project_comments %}
+                    <div class="col m10">
+                        <div class="col m3">
+                            <span class=" btn-flat disabled" style="padding-top: 10%">{{ item.username.username }}</span>
+                        </div>
+                        <div class="col m7 ">
+                            <blockquote>
+                               {% if item.replyusername %}
+                                   <span class="chip">
+                                       @{{ item.replyusername }}
+                                   </span>
+                               {% endif %}
+                               <span>{{ item.content }}</span>
+                               <br>
+                                <span class="right grey-text">{{ item.commenttime }}</span>
+                            </blockquote>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <span>Sorry, there is no comment so far.</span>
+            {% endif %}
+        </div>
       </div>
   </div>
 </div>
 </div>
+
 {% endblock %}

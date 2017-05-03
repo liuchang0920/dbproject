@@ -4,20 +4,39 @@
 
 {% block main-content %}
 <!--share button-->
+{#    <div id="fb-root"></div>#}
+{#    <script>(function(d, s, id) {#}
+{#      var js, fjs = d.getElementsByTagName(s)[0];#}
+{#      if (d.getElementById(id)) return;#}
+{#      js = d.createElement(s); js.id = id;#}
+{#      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=727244590785229";#}
+{#      fjs.parentNode.insertBefore(js, fjs);#}
+{#    }(document, 'script', 'facebook-jssdk'));#}
+{#    </script>#}
+
+    <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Your Website Title" />
+  <meta property="og:description"   content="Your description" />
+  <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
+
     <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=727244590785229";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=727244590785229";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
     <style>
         img{
             max-width: 80%;
         }
     </style>
+
+
+
 <div class="container">
   <div class="row">
     <div class="col m2">
@@ -28,6 +47,13 @@
             <div>3 created</div>
             <br>
             <div><button href="" class="btn red lighten-3">follow</button></div>
+             <br> <br>
+            <div class="row">
+              <div class="fb-share-button  col m6 white"
+                data-href="http://www.google.com"
+                data-layout="button_count">
+              </div>
+          </div>
         </div>
     </div>
     <div class="col m8 offset-m1">
@@ -57,8 +83,13 @@
               <input type="submit" href="" class="btn col m12" value="Back this project">
           </form>
 
-          <a href="" class="btn col m6 white"><span class="black-text"><i class="fa fa-star" aria-hidden="true"></i>Save</span></a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="btn col m6 white"><span class="black-text"><i class="fa fa-share" aria-hidden="true"></i>Share</span></a>
+          {% if request.session.username and likeproject %}
+              <a href="{% url 'kickstar:projectlike' project.pk 0 %}" class="btn col m12 white"><span class="black-text"><i class="fa fa-bookmark" aria-hidden="true"></i> Saved</span></a>
+          {% else %}
+              <a href="{% url 'kickstar:projectlike' project.pk 1 %}" class="btn col m12 white"><span class="black-text"><i class="fa fa-star" aria-hidden="true"></i> Like</span></a>
+          {% endif %}
+{#          <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="btn col m6 white"><span class="black-text"><i class="fa fa-share" aria-hidden="true"></i>Share</span></a>#}
+
       </div>
   </div>
   <div class="row">

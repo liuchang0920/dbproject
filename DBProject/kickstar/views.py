@@ -46,7 +46,10 @@ def logout(request):
 
 
 def register(request):
-    return render(request, 'kickstar/register.html', {})
+    if request.method == 'POST':
+        pass
+    else:
+        return render(request, 'kickstar/register.html', {})
 
 
 def activity(request):
@@ -59,7 +62,6 @@ def profile(request):
     user = User.objects.get(username = username)
     # user creditcard info
     creditcards = Usercreditcardinfo.objects.filter(user=user)
-    print "credit card size:%d" % (len(creditcards))
 
     return render(request, 'kickstar/profile.html', {'user': user, 'creditcards': creditcards})
 
@@ -68,8 +70,12 @@ def project(request, pk):
     project = get_object_or_404(Projectpropose, pk=pk)
     project_updates = Projectupdate.objects.filter(project = project).order_by('-updatenumber')
     project_comments = Comment.objects.filter(project=project).order_by('-commenttime')
-
-    return render(request, 'kickstar/project.html', {'project': project, 'project_updates': project_updates, 'project_comments': project_comments})
+    likeproject = False
+    if request.session["username"]:
+        like = Projectlike.objects.filter(project=project, user=User.objects.get(username=request.session['username']))
+        if like and like[0].value == 1:
+            likeproject = True
+    return render(request, 'kickstar/project.html', {'project': project, 'project_updates': project_updates, 'project_comments': project_comments, 'likeproject': likeproject})
 
 
 def back_project(request):
@@ -264,3 +270,24 @@ def save_creditcard_info(request):
             context['message'] = message
         return render(request, 'kickstar/profile.html', context)
 
+
+def project_like(request, pk, value):
+    if not request.session['username']:
+        message = 'you need to login first before start a project.'
+        return render(request, 'kickstar/index.html', {'message': message})
+    else:
+        # save info and dispatch to project page
+        user = User.objects.get(username=request.session['username'])
+        project = Projectpropose.objects.get(pk = pk)
+        projectlike = Projectlike.objects.filter(user=request.session['username'], project=project)
+        if projectlike:
+            to_modify = projectlike
+            to_modify.update(value=value)
+        else:
+            projectlike = Projectlike()
+            projectlike.user = user
+            projectlike.project = project
+            projectlike.value = value
+            projectlike.save()
+
+        return redirect('kickstar:project', pk=pk)

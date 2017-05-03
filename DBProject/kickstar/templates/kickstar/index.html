@@ -45,7 +45,7 @@
                             <small>  {{ item.pstarttime|timesince:item.plancompletetime }} left</small>
                         </div>
                         <div class="card-action">
-                          <a href="#"><small>Detail</small></a>
+                          <a href="{% url 'kickstar:project' item.pk %}"><small>Detail</small></a>
                         </div>
                       </div>
                   </div>

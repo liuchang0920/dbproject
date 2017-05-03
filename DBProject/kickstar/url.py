@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^savepassword/$', views.save_password, name='savepassword'),
     url(r'^savecreditcard/$', views.save_creditcard_info, name='savecreditcard'),
     url(r'^confirmpayment/$', views.confirm_payment, name='confirmpayment'),
+    url(r'^projectlike/(?P<pk>[0-9]+)/(?P<value>[0-9]+)/$', views.project_like, name="projectlike"),
 ]

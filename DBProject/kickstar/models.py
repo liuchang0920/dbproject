@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
-
 from django.db import models
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+
 
 class Category(models.Model):
     categoryid = models.CharField( max_length=50)
@@ -64,7 +64,7 @@ class Projectlike(models.Model):
         unique_together = (('project', 'user'),)
 
     def __str__(self):
-        return self.project.pid + ", " + self.username.username
+        return self.project.pname + ", " + self.user.username
 
 
 class Projectpledge(models.Model):
@@ -97,7 +97,7 @@ class Projectpropose(models.Model):
     pstatus = models.CharField(max_length=10)
     pbackgroundpic = models.ImageField(upload_to='kickstar/images/', blank=True, null=True)
     pcontentdetail = RichTextField(blank=True, null=True)
-
+    pmovieurl = models.CharField(max_length=200, blank=True, null=True)
     class Meta:
         db_table = 'projectPropose'
 

@@ -7,8 +7,8 @@
 <div class="row">
     <div class="col m12 center-align red lighten-5">
         <br>
-        <h4>  Project Name </h4>
-        <span class="grey-text small">by John Wall</span>
+        <h4>  {{ projectname }} </h4>
+        <span class="grey-text small">by {{ projectfunder }}</span>
         <br><p></p><br>
     </div>
 </div>
@@ -31,9 +31,15 @@
                 <br>
                 <div class="divider"></div>
                 <br>
-                <form class="row">
-                    <input type="text" class="input-field col m6" placeholder="10" size="50">
-                    <a href="#!" class="secondary-content" style="margin-top: 120px; margin-right: 50px"><i class="fa fa-credit-card-alt fa-3x"></i></a>
+                <form class="row" action="{% url 'kickstar:payment' %}" method="post">
+                    {% csrf_token %}
+                    <div style="display: none">
+                        <input type="text" name="projectid" value="{{ projectid }}">
+                        <input type="text" name="projectname" value="{{ projectname }}">
+                        <input type="text" name="projectfunder" value="{{ projectfunder }}">
+                    </div>
+                    <input name="amount" type="text" class="input-field col m6" placeholder="10" size="50">
+                    <button class="white"  type="submit"  class="secondary-content" style="border:none; margin-top: 0px; margin-left: 150px"><i class="fa fa-credit-card-alt fa-3x"  alt="pledge this project"></i></button>
                 </form>
             </li>
             <li class="collection-item avatar" >
@@ -45,9 +51,15 @@
                 <br>
                 <div class="divider"></div>
                 <br>
-                <form class="row">
-                    <input type="text" class="input-field col m6" placeholder="25" size="50">
-                    <a href="#!" class="secondary-content" style="margin-top: 120px; margin-right: 50px"><i class="fa fa-credit-card-alt fa-3x"></i></a>
+                <form class="row" action="{% url 'kickstar:payment' %}" method="post">
+                    {% csrf_token %}
+                    <div style="display: none">
+                        <input type="text" name="projectid" value="{{ projectid }}">
+                        <input type="text" name="projectname" value="{{ projectname }}">
+                        <input type="text" name="projectfunder" value="{{ projectfunder }}">
+                    </div>
+                    <input name="amount" type="text" class="input-field col m6" placeholder="25" size="50">
+                    <button class="white"  type="submit"  class="secondary-content" style="border:none; margin-top: 0px; margin-left: 150px"><i class="fa fa-credit-card-alt fa-3x"  alt="pledge this project"></i></button>
                 </form>
 
             </li>
@@ -60,9 +72,15 @@
                 <br>
                 <div class="divider"></div>
                 <br>
-                <form class="row">
-                    <input type="text" class="input-field col m6" placeholder="100" size="50">
-                    <a href="#!" class="secondary-content" style="margin-top: 120px; margin-right: 50px"><i class="fa fa-credit-card-alt fa-3x"  alt="pledge this project"></i></a>
+                <form class="row" action="{% url 'kickstar:payment' %}" method="post">
+                    {% csrf_token %}
+                    <div style="display: none">
+                        <input type="text" name="projectid" value="{{ projectid }}">
+                        <input type="text" name="projectname" value="{{ projectname }}">
+                        <input type="text" name="projectfunder" value="{{ projectfunder }}">
+                    </div>
+                    <input name="amount" type="text" class="input-field col m6" placeholder="100" size="50">
+                    <button class="white"  type="submit"  class="secondary-content" style="border:none; margin-top: 0px; margin-left: 150px"><i class="fa fa-credit-card-alt fa-3x"  alt="pledge this project"></i></button>
                 </form>
             </li>
             <li class="collection-item avatar">
@@ -74,13 +92,20 @@
                 <br>
                 <div class="divider"></div>
                 <br>
-                <form class="row">
-                    <input type="text" class="input-field col m6" placeholder="" size="50">
-                    <a href="#!" class="secondary-content" style="margin-top: 120px; margin-right: 50px"><i class="fa fa-credit-card-alt fa-3x"  alt="pledge this project"></i></a>
+                <form class="row" action="{% url 'kickstar:payment' %}" method="post">
+                    {% csrf_token %}
+                    <div style="display: none">
+                        <input type="text" name="projectid" value="{{ projectid }}">
+                        <input type="text" name="projectname" value="{{ projectname }}">
+                        <input type="text" name="projectfunder" value="{{ projectfunder }}">
+                    </div>
+                    <input name="amount" type="text" class="input-field col m6" placeholder="" size="50">
+                    <button class="white"  type="submit"  class="secondary-content" style="border:none; margin-top: 0px; margin-left: 150px"><i class="fa fa-credit-card-alt fa-3x"  alt="pledge this project"></i></button>
                 </form>
             </li>
           </ul>
     </div>
 </div>
 </div>
+    {{ projectname }}
 {% endblock %}

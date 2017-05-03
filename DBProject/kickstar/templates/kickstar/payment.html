@@ -8,8 +8,8 @@
 <div class="row">
     <div class="col m12 center-align red lighten-5">
         <br>
-        <h4>  Project Name </h4>
-        <span class="grey-text small">by John Wall</span>
+        <h4> {{ projectname }} </h4>
+        <span class="grey-text small">by {{ projectfunder }}</span>
         <br><p></p><br>
     </div>
 </div>
@@ -18,33 +18,72 @@
 <div class="col m10 offset-m2">
     <div class="col m4">
         <h5>Support this Project</h5>
+        <span class="grey-text small">
+            choose a payment method or add a new one
+        </span>
+        <br><br>
     </div>
 </div>
 <div class="col m10 offset-m2">
     <div class="col m7">
           <ul class="collection">
-            <li class="collection-item avatar">
-                <br>
-                <span>Existing Card</span>
-                <form class="row">
-                    <input type="text" class="input-field col m6 offset-m2" placeholder="cardname" size="50" value="123456">
+              {% if creditcards|length != 0 %}
+                {% for item in creditcards %}
+                    <li class="collection-item avatar">
+                        <br>
+                        <h6>Creditcard</h6>
+                        <br>
+                        <form class="row" method="post" action="{% url 'kickstar:confirmpayment' %}">
+                            {% csrf_token %}
+                            <div class="row input-field col m6">
+                                <input type="text" id="cardnumber" class="validate black-text" placeholder="card name" size="50" value="{{ item.creditno }}" disabled>
+                                <label for="cardnumber">card number</label>
+                            </div>
+                            <div class="row input-field col m6  ">
+                                <input type="text" id="cardname" class="validate black-text" placeholder="card name" size="50" value="{{ item.creditname }}" disabled>
+                                <label for="cardname">card name</label>
+                            </div>
+                            <div class="input-field col m3">
+                                <input id="validedate" type="text" class="validate black-text" placeholder="valid through" value="{{ item.validdate | date:"m/Y" }}" disabled>
+                                <label for="validedate">valid</label>
+                            </div>
+                            <div class="input-field col m2 offset-m1">
+                                <input type="text" id="securitycode" class="validate black-text" placeholder="sc" value="{{ item.securitycode }}" disabled>
+                                <label for="securitycode">security code</label>
+                            </div>
+                            <button class="white"  type="submit"  class="secondary-content" style="border:none; margin-top: 0px; margin-left: 150px"><i class="fa fa-credit-card-alt fa-3x"  alt="pledge this project"></i></button>
 
-                    <input type="text" class="input-field col m3 offset-m2" placeholder="valid through" value="12/19">
-                    <input type="text" class="input-field col m2 offset-m1" placeholder="sc" value="123">
-
-                    <a href="" type="submit"><i class="fa fa-credit-card-alt fa-3x right" style="margin-right: 60px; color: #26a69a;"  alt="pledge this project"></i></a>
-                </form>
-            </li>
-
+{#                            <a href="" type="submit"><i class="fa fa-credit-card-alt fa-3x right" style="margin-right: 60px; color: #26a69a;"  alt="pledge this project"></i></a>#}
+                        </form>
+                    </li>
+                {% endfor %}
+              {% else %}
+                  <li class="collection-item avatar">
+                  you need to add a payment method
+                  </li>
+              {% endif %}
               <!--use another-->
             <li class="collection-item avatar">
                 <br>
-                <span>Use New Card</span>
+                <h6>Use New Card</h6>
+                <br>
                 <form class="row">
-                    <input type="text" class="input-field col m6 offset-m2" placeholder="card name" size="50" value="123456">
-
-                    <input type="text" class="input-field col m3 offset-m2" placeholder="MM/YY" value="12/19">
-                    <input type="text" class="input-field col m2 offset-m1" placeholder="sc" value="123">
+                    <div class="row input-field col m6">
+                        <input type="text" id="cardnumber" class="validate" placeholder="card name" size="50"  >
+                        <label for="cardnumber">card number</label>
+                    </div>
+                    <div class="row input-field col m6  ">
+                        <input type="text" id="cardname" class="validate" placeholder="card name" size="50" >
+                        <label for="cardname">card name</label>
+                    </div>
+                    <div class="input-field col m3">
+                        <input id="validedate" type="date" class="datepicker" placeholder="valid through"  >
+                        <label for="validedate">valid</label>
+                    </div>
+                    <div class="input-field col m2 offset-m1">
+                        <input type="text" id="securitycode" class="validate" placeholder="sc" >
+                        <label for="securitycode">security code</label>
+                    </div>
 
                     <a href="" type="submit"><i class="fa fa-credit-card-alt fa-3x right" style="margin-right: 60px; color: #26a69a;"  alt="pledge this project"></i></a>
                 </form>
@@ -58,7 +97,7 @@
                 <div class="card-title">
                     <small>pledge amount</small>
                     <br>
-                    <b>$ 100 </b>
+                    <b>$ {{ amount }} </b>
                     <div class="divider">
 
                     </div>
@@ -71,5 +110,14 @@
     </div>
 </div>
 </div>
-
+<script>
+     $(document).ready(function() {
+        $('select').material_select();
+         $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 17, // Creates a dropdown of 15 years to control year
+            format: 'mm/yyyy'
+          });
+  });
+</script>
 {% endblock %}

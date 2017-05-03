@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^projectcomment/&', views.project_comment, name='projectcomment'),
     url(r'^savepassword/$', views.save_password, name='savepassword'),
     url(r'^savecreditcard/$', views.save_creditcard_info, name='savecreditcard'),
+    url(r'^confirmpayment/$', views.confirm_payment, name='confirmpayment'),
 ]

@@ -41,7 +41,15 @@
           <small class="grey-text">pledged for <i class="fa fa-usd" aria-hidden="true"></i>{{ project.amountpledged }}</small>
           <p><big>{{ project.backcount }}</big> Backers</p>
           <p> <small><span class="grey-text">plan complete time</span> {{ project.plancompletetime }}</small> </p>
-          <a href="" class="btn col m12">Back this project</a>
+          <form action="{% url 'kickstar:backproject' %}" method="post">
+              {% csrf_token %}
+              <div style="display: none;">
+                  <input type="text" name="projectid" value="{{ project.pk }}">
+                  <input type="text" name="projectname" value="{{ project.pname }}">
+                  <input type="text" name="projectfunder" value="{{ project.user.username }}">
+              </div>
+              <input type="submit" href="" class="btn col m12" value="Back this project">
+          </form>
 
           <a href="" class="btn col m6 white"><span class="black-text"><i class="fa fa-star" aria-hidden="true"></i>Save</span></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="btn col m6 white"><span class="black-text"><i class="fa fa-share" aria-hidden="true"></i>Share</span></a>

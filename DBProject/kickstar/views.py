@@ -73,11 +73,27 @@ def project(request, pk):
 
 
 def back_project(request):
-    return render(request, 'kickstar/backproject.html', {})
+    projectname = request.POST.get("projectname")
+    projectfunder = request.POST.get("projectfunder")
+    projectid = request.POST.get("projectid")
+    return render(request, 'kickstar/backproject.html', {'projectname':projectname, 'projectfunder': projectfunder, 'projectid': projectid})
 
 
 def payment(request):
-    return render(request, 'kickstar/payment.html', {})
+    # 'projectname':projectname, 'projectfunder': projectfunder, 'projectid': projectid
+    projectname = request.POST.get("projectname")
+    projectfunder = request.POST.get("projectfunder")
+    projectid = request.POST.get("projectid")
+    amount = request.POST.get("amount")
+    # fetch creditcard info
+    username = request.session.get("username")
+    user = User.objects.get(username=username)
+    creditcards = Usercreditcardinfo.objects.filter(user=user)
+    return render(request, 'kickstar/payment.html', {'projectname': projectname, 'projectfunder': projectfunder,'projectid': projectid, 'amount': amount,'creditcards':creditcards})
+
+
+def confirm_payment(request):
+    return render(request, 'kickstar/confirmpayment.html', {'message':'sucessfully pledged.<br>you can check in pledge project page'})
 
 
 def startproject(request):
@@ -196,7 +212,6 @@ def save_creditcard_info(request):
             creditcarinfo.securitycode = securitycode
             creditcarinfo.save()
             message = 'creditcard info created successfully'
-
     except:
         message = 'error occurrd, do not leave blank'
     finally:

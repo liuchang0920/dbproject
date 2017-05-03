@@ -5,77 +5,76 @@
 {% block main-content %}
 
 <div class="container">
-    <form class="col m10 offset-m2" method="post" action="{% url 'kickstar:startproject' %}">
+    <form class="col m10 offset-m2" method="post" action="{% url 'kickstar:startproject' %}"  enctype="multipart/form-data">
         {% csrf_token %}
-{#      <div class="row">#}
-{#        <div class="input-field col m10 offset-m1">#}
-{#            <select>#}
-{#              <option value="" disabled selected>Choose your option</option>#}
-{#              <option value="1">Music</option>#}
-{#              <option value="2">Sport</option>#}
-{#              <option value="3">Games</option>#}
-{#            </select>#}
-{#            <label>Choose a category</label>#}
-{#        </div>#}
-{#      </div>#}
-{#      <div class="row">#}
-{#        <div class="input-field col m10 offset-m1">#}
-{##}
-{#          <input id="projectname" name="projectname" type="text" class="validate">#}
-{#        <label for="projectname" >Project name</label>#}
-{#        </div>#}
-{#      </div>#}
-{#      <div class="row">#}
-{#        <div class="input-field col m10 offset-m1">#}
-{#          <textarea id="textarea1" class="materialize-textarea"></textarea>#}
-{#          <label for="textarea1">Short Blurb</label>#}
-{#        </div>#}
-{#      </div>#}
-{#      <div class="row">#}
-{#          <div class="file-field input-field col m10 offset-m1">#}
-{#              <div class="btn">#}
-{#                <span>BG Image</span>#}
-{#                <input type="file">#}
-{#              </div>#}
-{#              <div class="file-path-wrapper">#}
-{#                <input class="file-path validate" type="text">#}
-{#              </div>#}
-{#            </div>#}
-{#      </div>#}
-{#      <div class="row">#}
-{#          <div class="col m10 offset-m1">#}
-{#               <input type="date" class="datepicker" placeholder="choose a complete time">#}
-{#          </div>#}
-{#      </div>#}
-{#      <div class="row">#}
-{#        <div class="input-field col m5 offset-m1">#}
-{#          <input id="fundinggoal" type="number" class="validate" placeholder="$100">#}
-{#          <label for="fundinggoal">Funding Min Goal</label>#}
-{#        </div>#}
-{#        <div class="input-field col m5 ">#}
-{#          <input id="fundinggoal" type="number" class="validate" placeholder="$100">#}
-{#          <label for="fundinggoal">Funding Max Goal</label>#}
-{#        </div>#}
-{#      </div>#}
-{#      <div class="row">#}
-{#        <div class="input-field col m10 offset-m1">#}
-{#          <input id="introvideo" type="text" class="validate">#}
-{#          <label for="introvideo">Introduction Video (please insert url)</label>#}
-{#        </div>#}
-{#      </div>#}
+      <div class="row">
+        <div class="input-field col m10 offset-m1">
+            <select name="category">
+              <option value="" disabled selected>Choose your option</option>
+              <option value="1">Music</option>
+              <option value="2">Sport</option>
+              <option value="3">Games</option>
+            </select>
+            <label>Choose a category</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m10 offset-m1">
+          <input id="pname" name="pname" type="text" class="validate">
+            <label for="pname" >Project name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m10 offset-m1">
+          <textarea id="pdescription" name="pdescription" class="materialize-textarea"></textarea>
+          <label for="pdescription">Short Blurb</label>
+        </div>
+      </div>
+      <div class="row">
+          <div class="file-field input-field col m10 offset-m1">
+              <div class="btn">
+                <span>BG Image</span>
+                <input type="file" name="pbackgroundpic">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate"   type="text" >
+              </div>
+            </div>
+      </div>
+      <div class="row">
+          <div class="col m10 offset-m1">
+               <input type="date" name="plancompletetime" class="datepicker" placeholder="choose a complete time">
+          </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m5 offset-m1">
+          <input id="fundinggoal" type="number" class="validate" placeholder="$100" name="minbudget">
+          <label for="fundinggoal">Funding Min Goal</label>
+        </div>
+        <div class="input-field col m5 ">
+          <input id="fundinggoal" type="number" class="validate" placeholder="$100" name="maxbudget">
+          <label for="fundinggoal">Funding Max Goal</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col m10 offset-m1">
+          <input id="introvideo" type="text" class="validate" name="videourl">
+          <label for="introvideo">Introduction Video (please insert url)</label>
+        </div>
+      </div>
+        <div class="row">
+            <div class="col m10 offset-m1">
+                <textarea class="ckeditor" id="pcontentdetail" name="pcontentdetail" cols="80" rows="10">introduction to this project</textarea>
+                <script type="text/javascript">CKEDITOR.replace( 'pcontentdetail' )</script>
+            </div>
+        </div>
+
 {#        <div class="row">#}
 {#            <div class="col m10 offset-m1">#}
 {#                <textarea class="ckeditor" id="content" name="content" cols="80" rows="10">ddd</textarea>#}
 {#                <script type="text/javascript">CKEDITOR.replace( 'content' )</script>#}
 {#            </div>#}
 {#        </div>#}
-        {{ form }}
-        <div class="row">
-            <div class="col m10 offset-m1">
-                <textarea class="ckeditor" id="content" name="content" cols="80" rows="10">ddd</textarea>
-                <script type="text/javascript">CKEDITOR.replace( 'content' )</script>
-            </div>
-        </div>
         <br><br>
       <div class="row">
           <input type="submit" value="Submit" class="btn col m4 center offset-m4">

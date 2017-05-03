@@ -99,53 +99,49 @@ def confirm_payment(request):
 def startproject(request):
     if request.method == "POST":
         #get field
-        project_form = ProjectProposeForm(request.POST)
-        if project_form.is_valid():
-            category = project_form.cleaned_data["category"]
-            pname = project_form.cleaned_data['pname']
-            pdescription = project_form.cleaned_data['pdescription']
-            # likecount =request.POST['likecount']
-            # backcount =request.POST['backcount']
-            minbudget = project_form.cleaned_data['minbudget']
-            maxbudget = project_form.cleaned_data['maxbudget']
-            # amountpledged = request.POST['amountpledged']
-            # pstarttime = request.POST['pstarttime']
-            plancompletetime = project_form.cleaned_data['plancompletetime']
-            # actualcompletetime = forms.DateTimeField()
-            pstatus = "funding"
-            pbackgroundpic = project_form.cleaned_data['pdescription']
-            pcontentdetail = request.POST['content']
-            # save
-            project_to_save = Projectpropose()
-            project_to_save.category = Category.objects.get(pk=1)
-            project_to_save.user = User.objects.get(username=request.session["username"])
-            project_to_save.pname = pname
-            project_to_save.pdescription = pdescription
-            project_to_save.likecount = 0
-            project_to_save.backcount = 0
-            project_to_save.minbudget = minbudget
-            project_to_save.maxbudget = maxbudget
-            project_to_save.amountpledged = 0
-            project_to_save.pstarttime = datetime.datetime.now()
-            project_to_save.plancompletetime = plancompletetime # not sure format correct
-            project_to_save.pstatus = "funding"
-            project_to_save.pbackgroundpic = pbackgroundpic
-            project_to_save.pcontentdetail = pcontentdetail
+        # suppose everthing is fine
 
-            project_to_save.save()
-            message = 'successfully founded.'
-            return render(request, 'kickstar/index.html', {'message': message})
-        else:
-            return render(request, 'kickstar/startproject.html', {'message':"some field is wrong"})
-        return render(request, 'kickstar/startproject.html', {})
+        # category = Category.objects.get(cname = request.POST["category"])
+        pname = request.POST['pname']
+        pdescription = request.POST['pdescription']
+        # likecount =request.POST['likecount']
+        # backcount =request.POST['backcount']
+        minbudget = request.POST['minbudget']
+        maxbudget = request.POST['maxbudget']
+        # amountpledged = request.POST['amountpledged']
+        # pstarttime = request.POST['pstarttime']
+        plancompletetime = request.POST['plancompletetime']
+        # actualcompletetime = forms.DateTimeField()
+        pstatus = "funding"
+        pbackgroundpic = request.FILES['pbackgroundpic']
+        pcontentdetail = request.POST['pcontentdetail']
+        # save
+        project_to_save = Projectpropose()
+        project_to_save.category = Category.objects.get(pk=1)
+        project_to_save.user = User.objects.get(username=request.session["username"])
+        project_to_save.pname = pname
+        project_to_save.pdescription = pdescription
+        project_to_save.likecount = 0
+        project_to_save.backcount = 0
+        project_to_save.minbudget = minbudget
+        project_to_save.maxbudget = maxbudget
+        project_to_save.amountpledged = 0
+        project_to_save.pstarttime = datetime.datetime.now()
+        project_to_save.plancompletetime = datetime.datetime.now() # not sure format correct
+        project_to_save.pstatus = "funding"
+        project_to_save.pbackgroundpic = pbackgroundpic
+        project_to_save.pcontentdetail = pcontentdetail
+        project_to_save.save()
+        message = 'successfully founded.'
+        return render(request, 'kickstar/index.html', {'message': message})
+
     else:
         message = ''
         if not request.session.get("username"):
             message = 'you need to login first before start a project.'
             return render(request, 'kickstar/index.html', {'message': message})
         else:
-            form = ProjectProposeForm()
-            return render(request, 'kickstar/startproject.html',{'form':form})
+            return render(request, 'kickstar/startproject.html')
 
 
 def updateproject(reqeust):

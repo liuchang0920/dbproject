@@ -95,7 +95,7 @@ class Projectpropose(models.Model):
     plancompletetime = models.DateTimeField()
     actualcompletetime = models.DateTimeField(blank=True, null=True)
     pstatus = models.CharField(max_length=10)
-    pbackgroundpic = models.ImageField(upload_to='photos/', blank=True, null=True)
+    pbackgroundpic = models.ImageField(upload_to='kickstar/images/', blank=True, null=True)
     pcontentdetail = RichTextField(blank=True, null=True)
 
     class Meta:

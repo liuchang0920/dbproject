@@ -5,61 +5,77 @@
 {% block main-content %}
 
 <div class="container">
-    <form class="col m10 offset-m2">
-      <div class="row">
-        <div class="input-field col m6 offset-m3">
-            <select>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="1">Music</option>
-              <option value="2">Sport</option>
-              <option value="3">Games</option>
-            </select>
-            <label>Choose a category</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col m6 offset-m3">
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
-          <label for="textarea1">Short Blurb</label>
-        </div>
-      </div>
-      <div class="row">
-          <div class="file-field input-field col m6 offset-m3">
-              <div class="btn">
-                <span>BG Image</span>
-                <input type="file">
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-              </div>
+    <form class="col m10 offset-m2" method="post" action="{% url 'kickstar:startproject' %}">
+        {% csrf_token %}
+{#      <div class="row">#}
+{#        <div class="input-field col m10 offset-m1">#}
+{#            <select>#}
+{#              <option value="" disabled selected>Choose your option</option>#}
+{#              <option value="1">Music</option>#}
+{#              <option value="2">Sport</option>#}
+{#              <option value="3">Games</option>#}
+{#            </select>#}
+{#            <label>Choose a category</label>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div class="row">#}
+{#        <div class="input-field col m10 offset-m1">#}
+{##}
+{#          <input id="projectname" name="projectname" type="text" class="validate">#}
+{#        <label for="projectname" >Project name</label>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div class="row">#}
+{#        <div class="input-field col m10 offset-m1">#}
+{#          <textarea id="textarea1" class="materialize-textarea"></textarea>#}
+{#          <label for="textarea1">Short Blurb</label>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div class="row">#}
+{#          <div class="file-field input-field col m10 offset-m1">#}
+{#              <div class="btn">#}
+{#                <span>BG Image</span>#}
+{#                <input type="file">#}
+{#              </div>#}
+{#              <div class="file-path-wrapper">#}
+{#                <input class="file-path validate" type="text">#}
+{#              </div>#}
+{#            </div>#}
+{#      </div>#}
+{#      <div class="row">#}
+{#          <div class="col m10 offset-m1">#}
+{#               <input type="date" class="datepicker" placeholder="choose a complete time">#}
+{#          </div>#}
+{#      </div>#}
+{#      <div class="row">#}
+{#        <div class="input-field col m5 offset-m1">#}
+{#          <input id="fundinggoal" type="number" class="validate" placeholder="$100">#}
+{#          <label for="fundinggoal">Funding Min Goal</label>#}
+{#        </div>#}
+{#        <div class="input-field col m5 ">#}
+{#          <input id="fundinggoal" type="number" class="validate" placeholder="$100">#}
+{#          <label for="fundinggoal">Funding Max Goal</label>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div class="row">#}
+{#        <div class="input-field col m10 offset-m1">#}
+{#          <input id="introvideo" type="text" class="validate">#}
+{#          <label for="introvideo">Introduction Video (please insert url)</label>#}
+{#        </div>#}
+{#      </div>#}
+{#        <div class="row">#}
+{#            <div class="col m10 offset-m1">#}
+{#                <textarea class="ckeditor" id="content" name="content" cols="80" rows="10">ddd</textarea>#}
+{#                <script type="text/javascript">CKEDITOR.replace( 'content' )</script>#}
+{#            </div>#}
+{#        </div>#}
+        {{ form }}
+        <div class="row">
+            <div class="col m10 offset-m1">
+                <textarea class="ckeditor" id="content" name="content" cols="80" rows="10">ddd</textarea>
+                <script type="text/javascript">CKEDITOR.replace( 'content' )</script>
             </div>
-      </div>
-      <div class="row">
-          <div class="col m6 offset-m3">
-               <input type="date" class="datepicker" placeholder="choose a complete time">
-          </div>
-      </div>
-      <div class="row">
-        <div class="input-field col m6 center offset-m3">
-          <input id="fundinggoal" type="number" class="validate" placeholder="$100">
-          <label for="fundinggoal">Funding Min Goal</label>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col m6 center offset-m3">
-          <input id="fundinggoal" type="number" class="validate" placeholder="$100">
-          <label for="fundinggoal">Funding Max Goal</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col m6 center offset-m3">
-          <input id="introvideo" type="number" class="validate">
-          <label for="introvideo">Introduction Video (please insert url)</label>
-        </div>
-      </div>
-      <div class="row">
-          <a href="" class="btn col m4 center offset-m4">Preview</a>
-      </div>
         <br><br>
       <div class="row">
           <input type="submit" value="Submit" class="btn col m4 center offset-m4">
@@ -75,4 +91,6 @@
           });
   });
 </script>
+    <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script><body>
+
 {% endblock %}

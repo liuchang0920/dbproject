@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from ckeditor.fields import RichTextField
-
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class Category(models.Model):
     categoryid = models.CharField( max_length=50)
@@ -95,7 +95,7 @@ class Projectpropose(models.Model):
     plancompletetime = models.DateTimeField()
     actualcompletetime = models.DateTimeField(blank=True, null=True)
     pstatus = models.CharField(max_length=10)
-    pbackgroundpic = models.CharField(max_length=200, blank=True, null=True)
+    pbackgroundpic = models.ImageField(upload_to='photos/', blank=True, null=True)
     pcontentdetail = RichTextField(blank=True, null=True)
 
     class Meta:

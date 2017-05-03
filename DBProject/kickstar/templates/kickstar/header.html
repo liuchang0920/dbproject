@@ -43,3 +43,8 @@
   <i class="material-icons">close</i>
 </div>
 </form>
+{% if message %}
+  <script>
+         Materialize.toast('{{ message }}', 4000);
+  </script>
+{%  endif %}

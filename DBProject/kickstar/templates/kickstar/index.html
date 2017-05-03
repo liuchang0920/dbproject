@@ -1,18 +1,18 @@
 {% extends 'kickstar/base.html' %}
-
+{% load mathfilters %}
 {% load static %}
 
 
 {% block main-content %}
     <!--carousel-->
-      <div class="carousel carousel-slider center" data-indicators="true">
+      <div class="carousel carousel-slider center" data-indicators="true" id="main-carousel">
         <div class="carousel-fixed-item center">
           <a class="btn waves-effect white grey-text darken-text-2" href="{% url 'kickstar:category' %}">See All Category</a>
         </div>
           {% for item in newest_project %}
-              <div class="carousel-item black-text" href="#one!" style="background: url({% static item.pbackgroundpic %}); background-size:cover;">
+              <div class="carousel-item white-text" href="#one!" style="background: url({% static item.pbackgroundpic %}); background-size:cover;">
                   <h2>{{ item.pname }}</h2>
-                  <p class="black-text">{{ item.pdescription }}</p>
+                  <p class="white-text">{{ item.pdescription }}</p>
               </div>
           {% endfor %}
       </div>
@@ -20,100 +20,112 @@
 <!--popular-->
       <div class="container">
           <div class="row">
-                <h4 class="col m6">Popular Projects</h4>
-                <span class="col m1 offset-m10"><a href="" class="btn ">more</a></span>
+            <h4 class="col m6">Popular Projects</h4>
+            <span class="col m1 offset-m10"><a href="{% url 'kickstar:category' %}" class="btn ">more</a></span>
           </div>
           <div class="row">
-            <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">
-                  <span class="card-title">ProjectName</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-              <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-              <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-              <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-              <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-              <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
+              {% for item in popular_project %}
+                  <div class="col s12 m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="{% static item.pbackgroundpic %}" style="height: 200px">
+                          <span class="card-title">{{ item.pname }}</span>
+                        </div>
+                        <div class="card-content">
+                          <p><small class="grey-text">by {{ item.user.username }}</small></p>
+                          <br>
+                          <p class="col m12">{{ item.pdescription }}</p>
+                            <br>
+                            <div class="m12">
+                                <small class="m6">{{ item.likecount }} people likes</small>
+                                <small class="m6 offset-m1" >  ${{ item.amountpledged }} pledged</small>
+                            </div>
+
+                            <small>  ${{ item.maxbudget|sub:item.amountpledged }} to go</small>
+                            <small>  {{ item.pstarttime|timesince:item.plancompletetime }} left</small>
+                        </div>
+                        <div class="card-action">
+                          <a href="#"><small>Detail</small></a>
+                        </div>
+                      </div>
+                  </div>
+              {% endfor %}
+
+{#              <div class="col s12 m4">#}
+{#              <div class="card">#}
+{#                <div class="card-image">#}
+{#                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">#}
+{#                  <span class="card-title">Card Title</span>#}
+{#                </div>#}
+{#                <div class="card-content">#}
+{#                  <p>I am a very simple card. I am good at containing small bits of information.#}
+{#                  I am convenient because I require little markup to use effectively.</p>#}
+{#                </div>#}
+{#                <div class="card-action">#}
+{#                  <a href="#">This is a link</a>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#              <div class="col s12 m4">#}
+{#              <div class="card">#}
+{#                <div class="card-image">#}
+{#                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">#}
+{#                  <span class="card-title">Card Title</span>#}
+{#                </div>#}
+{#                <div class="card-content">#}
+{#                  <p>I am a very simple card. I am good at containing small bits of information.#}
+{#                  I am convenient because I require little markup to use effectively.</p>#}
+{#                </div>#}
+{#                <div class="card-action">#}
+{#                  <a href="#">This is a link</a>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#              <div class="col s12 m4">#}
+{#              <div class="card">#}
+{#                <div class="card-image">#}
+{#                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">#}
+{#                  <span class="card-title">Card Title</span>#}
+{#                </div>#}
+{#                <div class="card-content">#}
+{#                  <p>I am a very simple card. I am good at containing small bits of information.#}
+{#                  I am convenient because I require little markup to use effectively.</p>#}
+{#                </div>#}
+{#                <div class="card-action">#}
+{#                  <a href="#">This is a link</a>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#              <div class="col s12 m4">#}
+{#              <div class="card">#}
+{#                <div class="card-image">#}
+{#                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">#}
+{#                  <span class="card-title">Card Title</span>#}
+{#                </div>#}
+{#                <div class="card-content">#}
+{#                  <p>I am a very simple card. I am good at containing small bits of information.#}
+{#                  I am convenient because I require little markup to use effectively.</p>#}
+{#                </div>#}
+{#                <div class="card-action">#}
+{#                  <a href="#">This is a link</a>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#              <div class="col s12 m4">#}
+{#              <div class="card">#}
+{#                <div class="card-image">#}
+{#                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">#}
+{#                  <span class="card-title">Card Title</span>#}
+{#                </div>#}
+{#                <div class="card-content">#}
+{#                  <p>I am a very simple card. I am good at containing small bits of information.#}
+{#                  I am convenient because I require little markup to use effectively.</p>#}
+{#                </div>#}
+{#                <div class="card-action">#}
+{#                  <a href="#">This is a link</a>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
           </div>
       </div>
     <br>
@@ -216,11 +228,16 @@
             </div>
           </div>
       </div>
-{#{% if message %}#}
-{#  <script>#}
-{#         Materialize.toast('{{ message }}', 4000);#}
-{#  </script>#}
-{#{%  endif %}#}
+    <script>
+        function nextPage(){
+            $('.carousel').carousel('next');
+        }
+
+        $(document).ready(function(){
+          $('.carousel').carousel();
+            setInterval(nextPage, 5000);
+        });
+    </script>
 
 {%  endblock %}
 

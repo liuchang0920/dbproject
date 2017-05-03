@@ -1,16 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-from .forms import *
+# from .forms import *
 import datetime
-from django.core import serializers
 
 
 def index(request):
     # fetch featured five projects
     newest_project = Projectpropose.objects.order_by('-pstarttime')[:5]
+    popular_project = Projectpropose.objects.order_by('-pstarttime')[:5]
     print len(newest_project)
 
-    return render(request, 'kickstar/index.html', {'newest_project': newest_project})
+    return render(request, 'kickstar/index.html', {'newest_project': newest_project, 'popular_project': popular_project})
 
 
 def login(request):
@@ -99,41 +99,40 @@ def confirm_payment(request):
 def startproject(request):
     if request.method == "POST":
         #get field
-        # suppose everthing is fine
+        # error check
 
         # category = Category.objects.get(cname = request.POST["category"])
-        pname = request.POST['pname']
-        pdescription = request.POST['pdescription']
-        # likecount =request.POST['likecount']
-        # backcount =request.POST['backcount']
-        minbudget = request.POST['minbudget']
-        maxbudget = request.POST['maxbudget']
-        # amountpledged = request.POST['amountpledged']
-        # pstarttime = request.POST['pstarttime']
-        plancompletetime = request.POST['plancompletetime']
-        # actualcompletetime = forms.DateTimeField()
-        pstatus = "funding"
-        pbackgroundpic = request.FILES['pbackgroundpic']
-        pcontentdetail = request.POST['pcontentdetail']
-        # save
-        project_to_save = Projectpropose()
-        project_to_save.category = Category.objects.get(pk=1)
-        project_to_save.user = User.objects.get(username=request.session["username"])
-        project_to_save.pname = pname
-        project_to_save.pdescription = pdescription
-        project_to_save.likecount = 0
-        project_to_save.backcount = 0
-        project_to_save.minbudget = minbudget
-        project_to_save.maxbudget = maxbudget
-        project_to_save.amountpledged = 0
-        project_to_save.pstarttime = datetime.datetime.now()
-        project_to_save.plancompletetime = datetime.datetime.now() # not sure format correct
-        project_to_save.pstatus = "funding"
-        project_to_save.pbackgroundpic = pbackgroundpic
-        project_to_save.pcontentdetail = pcontentdetail
-        project_to_save.save()
-        message = 'successfully founded.'
-        return render(request, 'kickstar/index.html', {'message': message})
+        try:
+            pname = request.POST['pname']
+            pdescription = request.POST['pdescription']
+            minbudget = request.POST['minbudget']
+            maxbudget = request.POST['maxbudget']
+            pbackgroundpic = request.FILES['pbackgroundpic']
+            pcontentdetail = request.POST['pcontentdetail']
+                        #           if not pname or not pdescription or not minbudget or not maxbudget or not pbackgroundpic or not pcontentdetail:
+        except:
+            message = 'need to fill every field.'
+            return render(request, 'kickstar/startproject.html', {'message': message})
+        else:
+            # save
+            project_to_save = Projectpropose()
+            project_to_save.category = Category.objects.get(pk=1)
+            project_to_save.user = User.objects.get(username=request.session["username"])
+            project_to_save.pname = pname
+            project_to_save.pdescription = pdescription
+            project_to_save.likecount = 0
+            project_to_save.backcount = 0
+            project_to_save.minbudget = minbudget
+            project_to_save.maxbudget = maxbudget
+            project_to_save.amountpledged = 0
+            project_to_save.pstarttime = datetime.datetime.now()
+            project_to_save.plancompletetime = datetime.datetime.now() # not sure format correct
+            project_to_save.pstatus = "funding"
+            project_to_save.pbackgroundpic = pbackgroundpic
+            project_to_save.pcontentdetail = pcontentdetail
+            project_to_save.save()
+            message = 'successfully founded.'
+            return render(request, 'kickstar/index.html', {'message': message})
 
     else:
         message = ''

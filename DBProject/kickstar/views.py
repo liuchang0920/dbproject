@@ -8,7 +8,6 @@ def index(request):
     # fetch featured five projects
     newest_project = Projectpropose.objects.order_by('-pstarttime')[:5]
     popular_project = Projectpropose.objects.order_by('-pstarttime')[:5]
-    print len(newest_project)
 
     return render(request, 'kickstar/index.html', {'newest_project': newest_project, 'popular_project': popular_project})
 
@@ -291,3 +290,16 @@ def project_like(request, pk, value):
             projectlike.save()
 
         return redirect('kickstar:project', pk=pk)
+
+
+def search(request):
+    keyword = request.POST.get("keyword").upper()
+    print  "key word:", keyword
+    project_name = Projectpropose.objects.filter(pname__icontains=keyword)
+    print len(project_name)
+    project_desciption = Projectpropose.objects.filter(pdescription__icontains=keyword)
+    print len(project_desciption)
+    searchresult = project_name | project_desciption
+    searchresult = searchresult.distinct().order_by('-pstarttime')
+    print len(searchresult)
+    return render(request, 'kickstar/search.html',{'searchresult': searchresult})

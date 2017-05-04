@@ -36,12 +36,14 @@
   </ul>
 </div>
 </nav>
-<form>
-<div class="input-field">
-  <input id="search" type="search"  placeholder="search a project" required>
-  <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-  <i class="material-icons">close</i>
-</div>
+<form action="{% url 'kickstar:search' %}" method="post">
+    {% csrf_token %}
+    <div class="input-field">
+      <input id="search" type="search"  placeholder="search a project" name="keyword" required>
+      <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+      <i class="material-icons">close</i>
+    </div>
+{#    <input type="submit" value="submit">#}
 </form>
 {% if message %}
   <script>

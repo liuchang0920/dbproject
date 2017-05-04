@@ -11,9 +11,12 @@
         <div class="input-field col m10 offset-m1">
             <select name="category">
               <option value="" disabled selected>Choose your option</option>
-              <option value="1">Music</option>
-              <option value="2">Sport</option>
-              <option value="3">Games</option>
+{#              <option value="1">Music</option>#}
+{#              <option value="2">Sport</option>#}
+{#              <option value="3">Games</option>#}
+                {% for item in category %}
+                    <option value="{{ item.categoryid }}">{{ item.cname }}</option>
+                {% endfor %}
             </select>
             <label>Choose a category</label>
         </div>

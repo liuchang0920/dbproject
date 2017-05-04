@@ -18,7 +18,7 @@
     <li>
         {% if request.session.username %}
            <!-- Dropdown Trigger -->
-          <a class='dropdown-button btn ' href='#' data-activates='dropdown1' style=" width: 100%;">{{ request.session.username }}</a>
+          <a class='dropdown-button btn ' href='#' data-activates='dropdown1' style=" width: 100%;">{{ request.session.user.username }}</a>
 
           <!-- Dropdown Structure -->
           <ul id='dropdown1' class='dropdown-content'>

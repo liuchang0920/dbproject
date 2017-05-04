@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect
 from .models import *
 # from .forms import *
 import datetime
@@ -27,6 +28,7 @@ def login(request):
                 #put into session
                 print "success"
                 request.session["username"] = username
+                request.session['user'] = user
                 message = "login Successful"
                 return render(request, 'kickstar/index.html', {'message': message})
             except:
@@ -55,10 +57,10 @@ def activity(request):
     return render(request, 'kickstar/activity.html', {})
 
 
-# should be post
 def profile(request):
-    username = request.session['username']
-    user = User.objects.get(username = username)
+    # username = request.session['username']
+    # user = User.objects.get(username = username)
+    user = request.session.get("user")
     # user creditcard info
     creditcards = Usercreditcardinfo.objects.filter(user=user)
 
@@ -114,14 +116,16 @@ def startproject(request):
             maxbudget = request.POST['maxbudget']
             pbackgroundpic = request.FILES['pbackgroundpic']
             pcontentdetail = request.POST['pcontentdetail']
-                        #           if not pname or not pdescription or not minbudget or not maxbudget or not pbackgroundpic or not pcontentdetail:
+            print "get everhting except category"
+            category = Category.objects.get(categoryid=request.POST["category"])
         except:
             message = 'need to fill every field.'
-            return render(request, 'kickstar/startproject.html', {'message': message})
+            category = Category.objects.all()
+            return render(request, 'kickstar/startproject.html', {'message': message, 'category':category})
         else:
             # save
             project_to_save = Projectpropose()
-            project_to_save.category = Category.objects.get(pk=1)
+            project_to_save.category = category
             project_to_save.user = User.objects.get(username=request.session["username"])
             project_to_save.pname = pname
             project_to_save.pdescription = pdescription
@@ -137,7 +141,8 @@ def startproject(request):
             project_to_save.pcontentdetail = pcontentdetail
             project_to_save.save()
             message = 'successfully founded.'
-            return render(request, 'kickstar/index.html', {'message': message})
+            redirecturl = 'kickstar:index'
+            return HttpResponseRedirect(redirecturl)
 
     else:
         message = ''
@@ -145,10 +150,16 @@ def startproject(request):
             message = 'you need to login first before start a project.'
             return render(request, 'kickstar/index.html', {'message': message})
         else:
-            return render(request, 'kickstar/startproject.html')
+            # category information
+            category = Category.objects.all()
+            return render(request, 'kickstar/startproject.html',{'category':category})
 
 
-def updateproject(reqeust):
+def update_project(reqeust):
+    title = reqeust.POST.get("title")
+    content = reqeust.POST.get("content")
+    if title == '' or content == '':
+        return redirect('kickstar:')
     return render(reqeust, 'kickstar/updateproject.html', {})
 
 
@@ -172,7 +183,24 @@ def category_detail(request, categoryid):
 
 
 def save_profile(request):
-    return render(request, 'kickstar/test.html', {})
+    email = request.POST.get('email')
+    firstname = request.POST['firstname']
+    lastname = request.POST['lastname']
+    hometown = request.POST['hometown']
+    interests = request.POST['interests']
+    user = request.session.get("user")
+    message = 'update succesfully'
+    if email != '' and firstname != '' and lastname != '' and hometown != '' and interests != '':
+        user.email = email
+        user.firstname = firstname
+        user.lastname = lastname
+        user.hometown = hometown
+        user.interests = interests
+        user.save()
+        request.session["user"] = user
+    else:
+        message = 'input fields cannot be empty'
+    return HttpResponseRedirect('/kickstar/profile?message='+message)
 
 
 def project_comment(request):
@@ -293,13 +321,13 @@ def project_like(request, pk, value):
 
 
 def search(request):
-    keyword = request.POST.get("keyword").upper()
-    print  "key word:", keyword
+    keyword = request.POST.get("keyword")
     project_name = Projectpropose.objects.filter(pname__icontains=keyword)
-    print len(project_name)
     project_desciption = Projectpropose.objects.filter(pdescription__icontains=keyword)
-    print len(project_desciption)
     searchresult = project_name | project_desciption
     searchresult = searchresult.distinct().order_by('-pstarttime')
-    print len(searchresult)
     return render(request, 'kickstar/search.html',{'searchresult': searchresult})
+
+
+def rate_project(request, pk):
+    pass # username =

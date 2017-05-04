@@ -4,23 +4,13 @@
 
 {% block main-content %}
 <!--share button-->
-{#    <div id="fb-root"></div>#}
-{#    <script>(function(d, s, id) {#}
-{#      var js, fjs = d.getElementsByTagName(s)[0];#}
-{#      if (d.getElementById(id)) return;#}
-{#      js = d.createElement(s); js.id = id;#}
-{#      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=727244590785229";#}
-{#      fjs.parentNode.insertBefore(js, fjs);#}
-{#    }(document, 'script', 'facebook-jssdk'));#}
-{#    </script>#}
-
-    <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
+  <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
   <meta property="og:type"          content="website" />
   <meta property="og:title"         content="Your Website Title" />
   <meta property="og:description"   content="Your description" />
   <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
 
-    <div id="fb-root"></div>
+<div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -29,14 +19,14 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
-    <style>
-        img{
-            max-width: 80%;
-        }
-    </style>
-
-
-
+<style>
+    img{
+        max-width: 80%;
+    }
+</style>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'kickstar/css/fontawesome-stars.css' %}">
+<script src="{% static 'kickstar/js/jquery.barrating.min.js' %}" ></script>
 <div class="container">
   <div class="row">
     <div class="col m2">
@@ -94,9 +84,10 @@
   </div>
   <div class="row">
       <ul id="tabs-swipe-demo" class="tabs col offset-m2">
-        <li class="tab col s3"><a class="active" href="#campaign">Campaign</a></li>
-        <li class="tab col s3"><a href="#updates">Updates</a></li>
-        <li class="tab col s3"><a   href="#comments">Comments</a></li>
+        <li class="tab col s2"><a class="active" href="#campaign">Campaign</a></li>
+        <li class="tab col s2"><a href="#updates">Updates</a></li>
+        <li class="tab col s2"><a   href="#comments">Comments</a></li>
+        <li class="tab col s2"><a   href="#rate">Rate</a></li>
       </ul>
       <div id="campaign" class="col m12 offset-m2">
             <h3 class="normal mb3 mb7-sm mobile-hide">
@@ -153,21 +144,31 @@
 
       </div>
       <div id="updates" class="col m12 offset-m2">
-          <br><br>
-{#          <div class="col m10">#}
-{#            <div class="col m3">#}
-{#                <span class=" btn-flat disabled">2017 April 7</span>#}
-{#            </div>#}
-{#            <div class="col m7 ">#}
-{#                <blockquote>#}
-{#                    Project Progress day3#}
-{#                    sdfasdfafsdfsadfdddddddddddddddddddddddddddddddd#}
-{#                    <br>sdfasdf#}
-{#                    df#}
-{#                </blockquote>#}
-{#            </div>#}
-{#          </div>#}
-
+         <br><br>
+         {% if request.session.user.pk == project.user.pk %}
+                       <!--update form-->
+          <form action="{% url 'kickstar:updateproject' %}" method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="input-field col s6">
+                    <input id="title" name="title" type="text" class="materialize-textarea validate" placeholder="summary">
+                    <label class="active" for="title">update summary</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s6">
+                    <textarea id="content" name="content" type="text" class="materialize-textarea validate" placeholder="update info"></textarea>
+                    <label class="active" for="comment">write your progress</label>
+                </div>
+                <div class="col s3" style="padding-bottom: 10%">
+                  <input type="submit" value="update" class="btn" >
+                </div>
+                    <div style="display: none;">
+                        <input type="text" value="{{ project.pk }}" name="pk">
+                    </div>
+              </div>
+          </form>
+         {% endif %}
          {% if project_updates %}
              {% for item in project_updates %}
                   <div class="col m10">
@@ -191,22 +192,7 @@
       </div>
       <div id="comments" class="col m12 offset-m2">
           <br><br>
-{#          <div class="col m10">#}
-{#            <div class="col m3">#}
-{#                <span class=" btn-flat disabled">John Wall</span>#}
-{#            </div>#}
-{#            <div class="col m7 ">#}
-{#                <blockquote>#}
-{#                   <span class="chip">#}
-{#                       @Amy#}
-{#                   </span>#}
-{#                   <span>  this is a great idea. hope this project works</span>#}
-{#                   <br>#}
-{#                    <span class="right grey-text">Aprl 1</span>#}
-{#                </blockquote>#}
-{#            </div>#}
-{#          </div>#}
-            <!--comment input-->
+          <!--comment input-->
           <form action="{% url 'kickstar:projectcomment' %}" method="post">
                {% csrf_token %}
               <div class="row">
@@ -214,14 +200,13 @@
                     <textarea id="content" name="content" type="text" class="materialize-textarea validate" placeholder="@username to mention"></textarea>
                     <label class="active" for="comment">write your comment</label>
                 </div>
-                <div class="col s3">
+                <div class="col s3" style="padding-bottom: 10%">
                   <input type="submit" value="comment" class="btn">
                 </div>
                     <div style="display: none;">
                         <input type="text" value="{{ project.pk }}" name="pk">
                     </div>
               </div>
-
           </form>
             {% if project_comments %}
                 {% for item in project_comments %}
@@ -247,9 +232,29 @@
                 <span>Sorry, there is no comment so far.</span>
             {% endif %}
         </div>
+        <!--rate -->
+      <div id="rate" class="col m12 offset-m2">
+          <form action="{% url 'kickstar:rateproject' %}" method="post">
+              <input type="text" value="{{ project.pk }}" name="pk" style="display: none;">
+                <select id="ratingsection">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              <input type="submit" value="Rate" class="btn">
+          </form>
+      </div>
       </div>
   </div>
 </div>
 </div>
-
+<script type="text/javascript">
+    $(function() {
+      $('#ratingsection').barrating({
+        theme: 'fontawesome-stars'
+      });
+   });
+</script>
 {% endblock %}

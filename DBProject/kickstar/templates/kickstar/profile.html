@@ -22,17 +22,17 @@
           {% csrf_token %}
           <div class="row">
             <div class="input-field col s6">
-              <input id="email" type="email" class="validate" value="{{ user.email }}">
+              <input id="email" type="email" name="email" class="validate" value="{{ user.email }}">
               <label for="email">Email</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s3">
-              <input id="first_name" type="text" class="validate" value="{{ user.firstname }}">
+              <input id="first_name" name="firstname" type="text" class="validate" value="{{ user.firstname }}">
               <label for="first_name">First Name</label>
             </div>
             <div class="input-field col s3">
-              <input id="last_name" type="text" class="validate" value="{{ user.lastname }}">
+              <input id="last_name" type="text" name="lastname" class="validate" value="{{ user.lastname }}">
               <label for="last_name">Last Name</label>
             </div>
           </div>
@@ -51,13 +51,13 @@
 {#         </div>#}
          <div class="row">
             <div class="input-field col s6">
-              <input id="Hometown" type="text" class="validate" value="{{ user.hometown }}">
+              <input id="Hometown" type="text" name="hometown" class="validate" value="{{ user.hometown }}">
               <label for="Hometown">Hometown</label>
             </div>
          </div>
          <div class="row">
             <div class="input-field col s6">
-              <input id="interest" type="text" class="validate" value="{{ user.interests }}">
+              <input id="interest" type="text" name="interests" class="validate" value="{{ user.interests }}">
               <label for="interest">Interests <span class="text-grey small">(separate with ',')</span></label>
             </div>
          </div>
@@ -264,4 +264,10 @@
 {#         Materialize.toast('{{ message }}', 4000);#}
 {#  </script>#}
 {#{%  endif %}#}
+    <script>
+        var Request = new Object();
+        Request = GetRequest();
+        message = Request['message'];
+        Materialize.toast(message, 4000);
+    </script>
 {% endblock %}

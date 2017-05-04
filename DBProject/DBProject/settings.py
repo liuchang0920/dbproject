@@ -143,3 +143,6 @@ MEDIA_URL = "/kickstar/static/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "kickstar/static/")
 
 CKEDITOR_IMAGE_BACKEND = 'PIL'
+
+# object session
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'

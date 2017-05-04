@@ -14,7 +14,6 @@ urlpatterns = [
     url(r'^backproject', views.back_project, name='backproject'),
     url(r'^payment', views.payment, name='payment'),
     url(r'^startproject', views.startproject, name='startproject'),
-    url(r'^updateproject', views.updateproject, name='updateproject'),
     url(r'^test/', views.test, name='test'),
     url(r'^logout/', views.logout, name='logout'),
     url(r'^category/$', views.category, name='category'),
@@ -26,4 +25,6 @@ urlpatterns = [
     url(r'^confirmpayment/$', views.confirm_payment, name='confirmpayment'),
     url(r'^projectlike/(?P<pk>[0-9]+)/(?P<value>[0-9]+)/$', views.project_like, name="projectlike"),
     url(r'^search/$', views.search, name='search'),
+    url(r'^rateproject/$', views.rate_project, name="rateproject"),
+    url(r'^updateproject/$', views.update_project, name="updateproject"),
 ]

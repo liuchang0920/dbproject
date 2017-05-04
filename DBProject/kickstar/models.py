@@ -150,7 +150,7 @@ class User(models.Model):
     lastname = models.CharField(max_length=20, blank=True, null=True)
     email = models.CharField(max_length=20, blank=True, null=True)
     hometown = models.CharField(max_length=20, blank=True, null=True)
-    interests = models.CharField(max_length=20, blank=True, null=True)
+    interests = models.CharField(max_length=200, blank=True, null=True)
     registertime = models.DateTimeField(blank=True, null=True)
 
     class Meta:

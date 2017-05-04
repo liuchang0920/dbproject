@@ -200,7 +200,9 @@ def save_profile(request):
         request.session["user"] = user
     else:
         message = 'input fields cannot be empty'
-    return HttpResponseRedirect('/kickstar/profile?message='+message)
+    creditcards = Usercreditcardinfo.objects.filter(user=user)
+    context = {'creditcards': creditcards, 'message': message}
+    return render(request, 'kickstar/profile.html', context)
 
 
 def project_comment(request):

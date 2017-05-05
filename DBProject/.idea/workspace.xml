@@ -21,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/kickstar/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="94" column="29" lean-forward="false" selection-start-line="94" selection-start-column="17" selection-end-line="94" selection-end-column="29" />
+            <state relative-caret-position="281">
+              <caret line="202" column="64" lean-forward="false" selection-start-line="202" selection-start-column="64" selection-end-line="202" selection-end-column="64" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
               </folding>
@@ -33,67 +33,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kickstar/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="31" lean-forward="false" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cateogrydetail.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/cateogrydetail.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DBProject/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="19" column="37" lean-forward="true" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="payment.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/payment.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="39" column="6" lean-forward="false" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
+            <state relative-caret-position="341">
+              <caret line="78" column="24" lean-forward="false" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
               <folding>
                 <element signature="e#1109#1131#0#HTML" expanded="true" />
-                <element signature="e#3772#3794#0#HTML" expanded="true" />
-                <marker date="1493941825000" expanded="false" signature="3144:3179" ph="..." />
+                <element signature="e#3809#3831#0#HTML" expanded="true" />
+                <marker date="1493999107000" expanded="false" signature="3144:3179" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="backproject.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/backproject.html">
+      <file leaf-file-name="search.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/search.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="77" column="79" lean-forward="false" selection-start-line="77" selection-start-column="70" selection-end-line="77" selection-end-column="79" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DBProject/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="134" column="23" lean-forward="true" selection-start-line="134" selection-start-column="23" selection-end-line="134" selection-end-column="23" />
+            <state relative-caret-position="270">
+              <caret line="18" column="91" lean-forward="false" selection-start-line="18" selection-start-column="91" selection-end-line="18" selection-end-column="91" />
               <folding />
             </state>
           </provider>
@@ -111,11 +69,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="startproject.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/startproject.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-743">
+              <caret line="17" column="33" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/test.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="36" column="18" lean-forward="true" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="updateproject.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/updateproject.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="37">
+              <caret line="21" column="12" lean-forward="false" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="project.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/project.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="213" column="19" lean-forward="false" selection-start-line="213" selection-start-column="19" selection-end-line="213" selection-end-column="19" />
+            <state relative-caret-position="150">
+              <caret line="236" column="0" lean-forward="true" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
               <folding>
                 <element signature="e#5231#5253#0#HTML" expanded="true" />
                 <element signature="e#6045#6072#0#HTML" expanded="true" />
@@ -127,10 +115,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="header.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/header.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="607">
+              <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="profile.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/profile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-230">
+            <state relative-caret-position="-2345">
               <caret line="47" column="85" lean-forward="false" selection-start-line="47" selection-start-column="81" selection-end-line="47" selection-end-column="85" />
               <folding>
                 <marker date="1493927234000" expanded="true" signature="10801:10920" ph="{% if message ... %}" />
@@ -151,13 +149,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>user</find>
-      <find>pbackgroundpic</find>
-      <find>photos</find>
-      <find>register</find>
-      <find>index</find>
-      <find>like</find>
-      <find>p</find>
       <find>save</find>
       <find>interest</find>
       <find>confir</find>
@@ -170,17 +161,24 @@
       <find>admin</find>
       <find>back</find>
       <find>follow</find>
-      <find>message</find>
       <find>search</find>
       <find>update</find>
       <find>updatenumber</find>
       <find>amount</find>
       <find>payment</find>
-      <find>pledge</find>
       <find>projectname</find>
       <find>redirect</find>
       <find>project</find>
+      <find>pledge</find>
+      <find>message</find>
+      <find>logout</find>
       <find>rate</find>
+      <find>login</find>
+      <find>Projectrate</find>
+      <find>confi</find>
+      <find>new</find>
+      <find>like</find>
+      <find>start</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -204,14 +202,14 @@
         <option value="$PROJECT_DIR$/kickstar/templates/kickstar/search.html" />
         <option value="$PROJECT_DIR$/kickstar/templates/kickstar/startproject.html" />
         <option value="$PROJECT_DIR$/DBProject/settings.py" />
-        <option value="$PROJECT_DIR$/kickstar/templates/kickstar/header.html" />
         <option value="$PROJECT_DIR$/kickstar/templates/kickstar/register.html" />
         <option value="$PROJECT_DIR$/kickstar/templates/kickstar/profile.html" />
         <option value="$PROJECT_DIR$/kickstar/url.py" />
-        <option value="$PROJECT_DIR$/kickstar/templates/kickstar/payment.html" />
         <option value="$PROJECT_DIR$/kickstar/models.py" />
-        <option value="$PROJECT_DIR$/kickstar/views.py" />
         <option value="$PROJECT_DIR$/kickstar/templates/kickstar/project.html" />
+        <option value="$PROJECT_DIR$/kickstar/templates/kickstar/header.html" />
+        <option value="$PROJECT_DIR$/kickstar/templates/kickstar/payment.html" />
+        <option value="$PROJECT_DIR$/kickstar/views.py" />
       </list>
     </option>
   </component>
@@ -863,14 +861,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="36" column="18" lean-forward="true" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -970,24 +960,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/search.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="91" lean-forward="false" selection-start-line="18" selection-start-column="91" selection-end-line="18" selection-end-column="91" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/startproject.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="33" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kickstar/static/kickstar/js/jquery.barrating.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1024,22 +996,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
           <caret line="34" column="35" lean-forward="true" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/updateproject.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="21" column="12" lean-forward="false" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="50" column="11" lean-forward="true" selection-start-line="48" selection-start-column="1" selection-end-line="50" selection-end-column="11" />
           <folding />
         </state>
       </provider>
@@ -1086,28 +1042,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/payment.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="39" column="6" lean-forward="false" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
-          <folding>
-            <element signature="e#1109#1131#0#HTML" expanded="true" />
-            <element signature="e#3772#3794#0#HTML" expanded="true" />
-            <marker date="1493941825000" expanded="false" signature="3144:3179" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-230">
-          <caret line="47" column="85" lean-forward="false" selection-start-line="47" selection-start-column="81" selection-end-line="47" selection-end-column="85" />
-          <folding>
-            <marker date="1493927234000" expanded="true" signature="10801:10920" ph="{% if message ... %}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kickstar/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
@@ -1118,26 +1052,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kickstar/views.py">
+    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="94" column="29" lean-forward="false" selection-start-line="94" selection-start-column="17" selection-end-line="94" selection-end-column="29" />
+        <state relative-caret-position="-2345">
+          <caret line="47" column="85" lean-forward="false" selection-start-line="47" selection-start-column="81" selection-end-line="47" selection-end-column="85" />
           <folding>
-            <element signature="e#0#64#0" expanded="true" />
+            <marker date="1493927234000" expanded="true" signature="10801:10920" ph="{% if message ... %}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/startproject.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-743">
+          <caret line="17" column="33" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="36" column="18" lean-forward="true" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/updateproject.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="37">
+          <caret line="21" column="12" lean-forward="false" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="91" lean-forward="false" selection-start-line="18" selection-start-column="91" selection-end-line="18" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="607">
+          <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/project.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="213" column="19" lean-forward="false" selection-start-line="213" selection-start-column="19" selection-end-line="213" selection-end-column="19" />
+        <state relative-caret-position="150">
+          <caret line="236" column="0" lean-forward="true" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
           <folding>
             <element signature="e#5231#5253#0#HTML" expanded="true" />
             <element signature="e#6045#6072#0#HTML" expanded="true" />
             <element signature="e#6190#6212#0#HTML" expanded="true" />
             <element signature="e#7779#7806#0#HTML" expanded="true" />
             <element signature="e#10178#10200#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kickstar/templates/kickstar/payment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="78" column="24" lean-forward="false" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
+          <folding>
+            <element signature="e#1109#1131#0#HTML" expanded="true" />
+            <element signature="e#3809#3831#0#HTML" expanded="true" />
+            <marker date="1493999107000" expanded="false" signature="3144:3179" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kickstar/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="202" column="64" lean-forward="false" selection-start-line="202" selection-start-column="64" selection-end-line="202" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -30,8 +30,9 @@ def login(request):
                 print "success"
                 request.session["username"] = username
                 request.session['user'] = user
-                message = "login Successful"
-                return render(request, 'kickstar/index.html', {'message': message})
+                message = "successfully login"
+                messages.add_message(request, messages.INFO, message)
+                return redirect("kickstar:index")
             except:
                 message = "username or password wrong"
                 return render(request, 'kickstar/login.html', {'message': message})
@@ -45,7 +46,8 @@ def logout(request):
     request.session["username"] = None
     request.session["user"] = None
     message = "successfully logout"
-    return render(request, 'kickstar/index.html', {'message': message})
+    messages.add_message(request, messages.INFO, message)
+    return redirect("kickstar:index")
 
 
 def register(request):
@@ -75,19 +77,21 @@ def project(request, pk):
     project_comments = Comment.objects.filter(project=project).order_by('-commenttime')
     like_project = False
     pledge_project = False
-    is_rate_project = False
-    if Projectpledge.objects.filter(project=project, user=request.session["user"]):
-        pledge_project = True
-
-    rate_project = False
-    rate_project = Projectrate.objects.get(project=project, user=request.session["user"])
-    if rate_project:
-        is_rate_project = True
 
     if request.session["username"]:
         like = Projectlike.objects.filter(project=project, user=User.objects.get(username=request.session['username']))
         if like and like[0].value == 1:
-            likeproject = True
+            like_project = True
+
+    if Projectpledge.objects.filter(project=project, user=request.session["user"]):
+        pledge_project = True
+
+    is_rate_project = False
+    try:
+        rate_project = Projectrate.objects.filter(project=project, user=request.session["user"])
+        is_rate_project = True
+    except:
+        pass
 
     context = {'project': project, 'project_updates': project_updates, 'project_comments': project_comments, 'likeproject': like_project, 'pledge_project': pledge_project}
     if is_rate_project:
@@ -119,19 +123,42 @@ def payment(request):
 def confirm_payment(request, status):
     print status
     pk = request.POST.get("pk")
-    creditno = request.POST.get("creditno")
-    creditcard_info = Usercreditcardinfo.objects.get(creditno=creditno)
     user = request.session.get("user")
+    creditno = request.POST.get("creditno")
+    print "creditnumber:", creditno
+    creditcard_info = Usercreditcardinfo()
+    if status == "exist":
+        creditcard_info = Usercreditcardinfo.objects.get(creditno=creditno, user=user)
+    else:
+        creditname = request.POST["creditname"]
+        validdate_str = request.POST["validdate"].split("/")
+        print validdate_str
+        validdate = datetime.date(year=int(validdate_str[1]), month=int(validdate_str[0]), day=1)
+        securitycode = request.POST["securitycode"]
+        creditcard_info = Usercreditcardinfo()
+        creditcard_info.user = user
+        creditcard_info.creditno = creditno
+        creditcard_info.creditname = creditname
+        creditcard_info.securitycode = securitycode
+        creditcard_info.validdate = validdate
+        creditcard_info.save()
+        print "save new card"
+
     amount = request.POST["amount"]
     pledge = Projectpledge()
-    pledge.project = Projectpropose.objects.get(pk=pk)
+    project = Projectpropose.objects.get(pk=pk)
+    pledge.project = project
     pledge.uciid = creditcard_info
     pledge.user = user
     pledge.amount = amount
     pledge.pledgetime = datetime.datetime.now()
     pledge.pledgestatus = 'pending'
-    pledge.save()
+    previous_pledge = Projectpledge.objects.filter(project=project, user=user)
+    if not previous_pledge:
+        project.backcount += 1
+        project.save()
 
+    pledge.save()
     return render(request, 'kickstar/confirmpayment.html', {'message':'sucessfully pledged.<br>you can check in pledge project page'})
 
 
@@ -172,9 +199,10 @@ def startproject(request):
             project_to_save.pbackgroundpic = pbackgroundpic
             project_to_save.pcontentdetail = pcontentdetail
             project_to_save.save()
-            message = 'successfully founded.'
-            redirecturl = 'kickstar:index'
-            return HttpResponseRedirect(redirecturl)
+            message = 'project successfully founded.'
+            messages.add_message(request, messages.INFO, message)
+            redirecturl = 'kickstar:project'
+            return redirect(redirecturl, pk=project_to_save.pk)
 
     else:
         message = ''
@@ -346,18 +374,28 @@ def project_like(request, pk, value):
     else:
         # save info and dispatch to project page
         user = User.objects.get(username=request.session['username'])
-        project = Projectpropose.objects.get(pk = pk)
+        project = Projectpropose.objects.get(pk=pk)
         projectlike = Projectlike.objects.filter(user=request.session['username'], project=project)
         if projectlike:
             to_modify = projectlike
             to_modify.update(value=value)
+            if value == "1":
+                project.likecount += 1
+                project.save()
+            else:
+                project.likecount -= 1
+                project.save()
         else:
+            #new record
             projectlike = Projectlike()
             projectlike.user = user
             projectlike.project = project
             projectlike.value = value
             projectlike.save()
-        if value == 1:
+            project.likecount += 1
+            project.save()
+        print "value: ", value
+        if value == "1":
             messages.add_message(request, messages.INFO, 'liked this project')
         else:
             messages.add_message(request, messages.INFO, 'disliked this project')
@@ -383,6 +421,7 @@ def rate_project(request):
     projectrate.rate = rate
     projectrate.ratetime = datetime.datetime.now()
     projectrate.save()
+
     messages.add_message(request, messages.INFO, 'rate successfully')
     return redirect('kickstar:project', pk=pk)
 

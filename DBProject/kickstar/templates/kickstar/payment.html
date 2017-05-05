@@ -73,27 +73,29 @@
                 <h6>Use New Card</h6>
                 <br>
                 <form class="row" method="post" action="{% url 'kickstar:confirmpayment' 'new' %}">
+                    {% csrf_token %}
                     <div style="display: none;">
                         <input type="text" name="pk" value="{{ projectid }}">
+                        <input type="text" name="amount" value="{{ amount }}">
                     </div>
                     <div class="row input-field col m6">
-                        <input type="text" id="cardnumber" class="validate" placeholder="card name" size="50"  >
+                        <input type="text" id="cardnumber" name="creditno" class="validate" placeholder="card name" size="50"  >
                         <label for="cardnumber">card number</label>
                     </div>
                     <div class="row input-field col m6  ">
-                        <input type="text" id="cardname" class="validate" placeholder="card name" size="50" >
+                        <input type="text" id="cardname" name="creditname" class="validate" placeholder="card name" size="50" >
                         <label for="cardname">card name</label>
                     </div>
                     <div class="input-field col m3">
-                        <input id="validedate" type="date" class="datepicker" placeholder="valid through"  >
+                        <input id="validedate" type="date" name="validdate" class="datepicker" placeholder="valid through"  >
                         <label for="validedate">valid</label>
                     </div>
                     <div class="input-field col m2 offset-m1">
-                        <input type="text" id="securitycode" class="validate" placeholder="sc" >
+                        <input type="text" id="securitycode" name="securitycode" class="validate" placeholder="sc" >
                         <label for="securitycode">security code</label>
                     </div>
-
-                    <a href="" type="submit"><i class="fa fa-credit-card-alt fa-3x right" style="margin-right: 60px; color: #26a69a;"  alt="pledge this project"></i></a>
+                    <button class="white"  type="submit"  class="secondary-content" style="border:none; margin-top: 0px; margin-left: 150px"><i class="fa fa-credit-card-alt fa-3x"  alt="pledge this project"></i></button>
+{#                    <a href="" type="submit"><i class="fa fa-credit-card-alt fa-3x right" style="margin-right: 60px; color: #26a69a;"  alt="pledge this project"></i></a>#}
                 </form>
             </li>
 

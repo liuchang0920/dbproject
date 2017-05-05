@@ -33,8 +33,13 @@
                         <br>
                         <h6>Creditcard</h6>
                         <br>
-                        <form class="row" method="post" action="{% url 'kickstar:confirmpayment' %}">
+                        <form class="row" method="post" action="{% url 'kickstar:confirmpayment' 'exist' %}">
                             {% csrf_token %}
+                             <div style="display: none;">
+                                 <input type="text" name="pk" value="{{ projectid }}">
+                                 <input type="text" name="creditno" value="{{ item.creditno }}">
+                                 <input type="text" name="amount" value="{{ amount }}">
+                            </div>
                             <div class="row input-field col m6">
                                 <input type="text" id="cardnumber" class="validate black-text" placeholder="card name" size="50" value="{{ item.creditno }}" disabled>
                                 <label for="cardnumber">card number</label>
@@ -67,7 +72,10 @@
                 <br>
                 <h6>Use New Card</h6>
                 <br>
-                <form class="row">
+                <form class="row" method="post" action="{% url 'kickstar:confirmpayment' 'new' %}">
+                    <div style="display: none;">
+                        <input type="text" name="pk" value="{{ projectid }}">
+                    </div>
                     <div class="row input-field col m6">
                         <input type="text" id="cardnumber" class="validate" placeholder="card name" size="50"  >
                         <label for="cardnumber">card number</label>

@@ -230,10 +230,4 @@
 {#         Materialize.toast('{{ message }}', 4000);#}
 {#  </script>#}
 {#{%  endif %}#}
-    <script>
-        var Request = new Object();
-        Request = GetRequest();
-        message = Request['message'];
-        Materialize.toast(message, 4000);
-    </script>
 {% endblock %}

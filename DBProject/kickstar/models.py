@@ -37,7 +37,7 @@ class Follow(models.Model):
         unique_together = (('followee', 'follower'),)
 
     def __str__(self):
-        return self.followeeid.username + " " + self.followerid.username
+        return self.followee.username + " " + self.follower.username
 
 
 class Logon(models.Model):
@@ -79,6 +79,9 @@ class Projectpledge(models.Model):
         db_table = 'projectPledge'
         unique_together = (('project', 'user', 'pledgetime'),)
 
+    def __str__(self):
+        return self.user.username + " " + self.project.pname + " " + str(self.amount)
+
 
 class Projectpropose(models.Model):
     # pid = models.CharField(primary_key=True, max_length=255)
@@ -115,6 +118,9 @@ class Projectrate(models.Model):
         db_table = 'projectRate'
         unique_together = (('project', 'user'),)
 
+    def __str__(self):
+        return self.user.username + " " + self.project.pname + " " + str( self.rate)
+
 
 class Projectsample(models.Model):
     project = models.ForeignKey('Projectpropose', on_delete=models.CASCADE)
@@ -131,17 +137,17 @@ class Projectsample(models.Model):
 
 class Projectupdate(models.Model):
     project = models.ForeignKey('Projectpropose', on_delete=models.CASCADE)
-    updatenumber = models.IntegerField()
+    # updatenumber = models.IntegerField(blank=True, null=True)
     postdate = models.DateTimeField()
     title = models.CharField(max_length=50)
     body = models.CharField(max_length=500)
 
     class Meta:
         db_table = 'projectUpdate'
-        unique_together = (('project', 'updatenumber'),)
+        unique_together = (('project', 'postdate'),)
 
     def __str__(self):
-        return self.project.pname + " " + str(self.updatenumber)
+        return self.project.pname + " " + str(self.postdate)
 
 
 class User(models.Model):

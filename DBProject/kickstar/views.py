@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import *
 # from .forms import *
+from django.contrib import messages
 import datetime
 
 
@@ -42,6 +43,7 @@ def login(request):
 
 def logout(request):
     request.session["username"] = None
+    request.session["user"] = None
     message = "successfully logout"
     return render(request, 'kickstar/index.html', {'message': message})
 
@@ -69,14 +71,29 @@ def profile(request):
 
 def project(request, pk):
     project = get_object_or_404(Projectpropose, pk=pk)
-    project_updates = Projectupdate.objects.filter(project = project).order_by('-updatenumber')
+    project_updates = Projectupdate.objects.filter(project = project).order_by('-postdate')
     project_comments = Comment.objects.filter(project=project).order_by('-commenttime')
-    likeproject = False
+    like_project = False
+    pledge_project = False
+    is_rate_project = False
+    if Projectpledge.objects.filter(project=project, user=request.session["user"]):
+        pledge_project = True
+
+    rate_project = False
+    rate_project = Projectrate.objects.get(project=project, user=request.session["user"])
+    if rate_project:
+        is_rate_project = True
+
     if request.session["username"]:
         like = Projectlike.objects.filter(project=project, user=User.objects.get(username=request.session['username']))
         if like and like[0].value == 1:
             likeproject = True
-    return render(request, 'kickstar/project.html', {'project': project, 'project_updates': project_updates, 'project_comments': project_comments, 'likeproject': likeproject})
+
+    context = {'project': project, 'project_updates': project_updates, 'project_comments': project_comments, 'likeproject': like_project, 'pledge_project': pledge_project}
+    if is_rate_project:
+        print "exsit rating"
+        context["rate_project"] = rate_project
+    return render(request, 'kickstar/project.html', context)
 
 
 def back_project(request):
@@ -99,7 +116,22 @@ def payment(request):
     return render(request, 'kickstar/payment.html', {'projectname': projectname, 'projectfunder': projectfunder,'projectid': projectid, 'amount': amount,'creditcards':creditcards})
 
 
-def confirm_payment(request):
+def confirm_payment(request, status):
+    print status
+    pk = request.POST.get("pk")
+    creditno = request.POST.get("creditno")
+    creditcard_info = Usercreditcardinfo.objects.get(creditno=creditno)
+    user = request.session.get("user")
+    amount = request.POST["amount"]
+    pledge = Projectpledge()
+    pledge.project = Projectpropose.objects.get(pk=pk)
+    pledge.uciid = creditcard_info
+    pledge.user = user
+    pledge.amount = amount
+    pledge.pledgetime = datetime.datetime.now()
+    pledge.pledgestatus = 'pending'
+    pledge.save()
+
     return render(request, 'kickstar/confirmpayment.html', {'message':'sucessfully pledged.<br>you can check in pledge project page'})
 
 
@@ -155,20 +187,30 @@ def startproject(request):
             return render(request, 'kickstar/startproject.html',{'category':category})
 
 
-def update_project(reqeust):
-    title = reqeust.POST.get("title")
-    content = reqeust.POST.get("content")
+def update_project(request):
+    pk = request.POST.get("pk")
+    title = request.POST.get("title")
+    content = request.POST.get("content")
     if title == '' or content == '':
-        return redirect('kickstar:')
-    return render(reqeust, 'kickstar/updateproject.html', {})
+        messages.add_message(request, messages.INFO, 'all fields must be filled')
+    else:
+        project = Projectpropose.objects.get(pk=pk)
+        update = Projectupdate()
+        update.project = project
+        update.postdate = datetime.datetime.now()
+        update.title = title
+        update.body = content
+        update.save()
+        messages.add_message(request, messages.INFO, 'update successfully')
+    return redirect('kickstar:project', pk=pk)
 
 
 def test(request):
     return render(request, 'kickstar/test.html', {"message":"this is a test"})
 
 
-def search(request):
-    return render(request, 'kickstar/test.html', {"message":"this is a test"})
+# def search(request):
+#     return render(request, 'kickstar/test.html', {"message":"this is a test"})
 
 
 def category(request):
@@ -207,16 +249,15 @@ def save_profile(request):
 
 def project_comment(request):
     if request.method == 'POST':
-        username = request.session['username']
-        print username
-        user = User.objects.get(username=username)
+        # username = request.session['username']
+        # print username
+        user = request.session.get("user")
         content = request.POST.get("content")
         print content
         pk = request.POST["pk"]
         project = Projectpropose.objects.get(pk=pk)
         comment = Comment(project=project, username=user, content=content, commenttime=datetime.datetime.now())
         comment.save()
-        #return render(request, 'kickstar/test.html', {})
         return redirect('kickstar:project', pk=pk)
 
 
@@ -231,7 +272,6 @@ def save_password(request):
         loginuser = Logon.objects.get(user=user, password=originalpassword)
         newpassword = request.POST.get("password")
         newpasswordR = request.POST.get("passwordR")
-
         if newpassword == newpasswordR:
             #update
             loginuser.password = newpassword
@@ -263,7 +303,6 @@ def save_creditcard_info(request):
         validthrough = str(request.POST['validthrough'])
         print "valid: ", validthrough
         month = int(validthrough.split('/')[0])
-
         year = int(validthrough.split('/')[1])
         validdate = datetime.datetime(year, month, 1)
         print validthrough
@@ -318,7 +357,10 @@ def project_like(request, pk, value):
             projectlike.project = project
             projectlike.value = value
             projectlike.save()
-
+        if value == 1:
+            messages.add_message(request, messages.INFO, 'liked this project')
+        else:
+            messages.add_message(request, messages.INFO, 'disliked this project')
         return redirect('kickstar:project', pk=pk)
 
 
@@ -331,5 +373,22 @@ def search(request):
     return render(request, 'kickstar/search.html',{'searchresult': searchresult})
 
 
-def rate_project(request, pk):
-    pass # username =
+def rate_project(request):
+    rate = request.POST.get("rate")
+    pk = request.POST.get("pk")
+    project = Projectpropose.objects.get(pk=pk)
+    projectrate = Projectrate()
+    projectrate.user = request.session["user"]
+    projectrate.project = project
+    projectrate.rate = rate
+    projectrate.ratetime = datetime.datetime.now()
+    projectrate.save()
+    messages.add_message(request, messages.INFO, 'rate successfully')
+    return redirect('kickstar:project', pk=pk)
+
+
+def follow(request, userid, followerid):
+    creditcards = Usercreditcardinfo.objects.filter(user=request.session['user'])
+    message = 'update follower info'
+    context = {'creditcards': creditcards, 'message': message}
+    return render(request, 'kickstar/profile.html', context)

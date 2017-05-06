@@ -36,7 +36,7 @@
         <div class="">
             <div>3 created</div>
             <br>
-            <div><button href="" class="btn red lighten-3">follow</button></div>
+            <div><a href="{% url 'kickstar:follow' project.user.username %}" class="btn red lighten-3">follow</a></div>
              <br> <br>
             <div class="row">
               <div class="fb-share-button  col m6 white"
@@ -59,9 +59,9 @@
     </div>
       <div class="col m4" >
           <big><i class="fa fa-usd" aria-hidden="true"></i>{{ project.maxbudget }}</big>
-          <small class="grey-text">pledged for <i class="fa fa-usd" aria-hidden="true"></i>{{ project.amountpledged }}</small>
+          <small class="grey-text">pledged already <i class="fa fa-usd" aria-hidden="true"></i>{{ project.amountpledged }}</small>
           <p><big>{{ project.backcount }}</big> Backers</p>
-          <select id="projectrating" disabled>
+          <select id="projectrating" >
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3" >3</option>
@@ -80,7 +80,7 @@
               <input type="submit" href="" class="btn col m12" value="Back this project">
           </form>
 
-          {% if request.session.username and likeproject %}
+          {% if request.session.user and likeproject %}
               <a href="{% url 'kickstar:projectlike' project.pk 0 %}" class="btn col m12 white"><span class="black-text"><i class="fa fa-bookmark" aria-hidden="true"></i> Saved</span></a>
           {% else %}
               <a href="{% url 'kickstar:projectlike' project.pk 1 %}" class="btn col m12 white"><span class="black-text"><i class="fa fa-star" aria-hidden="true"></i> Like</span></a>
@@ -202,14 +202,15 @@
         <div id="rate" class="col m12 offset-m2">
         {% if rate_project %}
             you have rated this project:
-            <br>{{ rate_project.rate }}
-            <select id="alreadyrated" name="rate">
-              <option value="1" {% if 1 ==  rate_project.rate  %}selected{% endif %}>1</option>
-              <option value="2" {% if 1 ==  rate_project.rate  %}selected{% endif %}>2</option>
-              <option value="3" {% if 1 ==  rate_project.rate  %}selected{% endif %}>3</option>
-              <option value="4" {% if 1 ==  rate_project.rate  %}selected{% endif %}>4</option>
-              <option value="5" {% if 1 ==  rate_project.rate  %}selected{% endif %}>5</option>
-            </select>
+            <br>{{ rate_project.rate }} <i class="fa fa-star" aria-hidden="true"></i>
+{#            <select id="alreadyrated" name="rate">#}
+{#              <option value="1" >1</option>#}
+{#              <option value="2" >2</option>#}
+{#              <option value="3" >3</option>#}
+{#              <option value="4" >4</option>#}
+{#              <option value="5" selected>5</option>#}
+{#            </select>#}
+
 
             {% elif pledge_project %}
               <form action="{% url 'kickstar:rateproject' %}" method="post">

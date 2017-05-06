@@ -1,5 +1,5 @@
 {% extends 'kickstar/base.html' %}
-
+{% load mathfilters %}
 {% load static %}
 
 {% block main-content %}
@@ -11,21 +11,31 @@
           <div class="row">
             {% if related_project|length != 0 %}
                 {% for item in related_project %}
-                    <div class="col s12 m4">
-                      <div class="card">
-                        <div class="card-image">
-                          <img src="{% static 'kickstar/images/sample-1.jpg' %}">
-                          <span class="card-title">{{ item.pname }}</span>
-                        </div>
-                        <div class="card-content">
-                          <p>{{ item.pdescription }}</p>
-                        </div>
-                        <div class="card-action">
-                          <a href="{% url 'kickstar:project' item.pk %}">more</a>
-                        </div>
+                      <div class="col s12 m4">
+                          <div class="card">
+                            <div class="card-image">
+                              <img src="{% static item.pbackgroundpic %}" style="height: 200px">
+                              <span class="card-title">{{ item.pname }}</span>
+                            </div>
+                            <div class="card-content">
+                              <p><small class="grey-text">by {{ item.user.username }}</small></p>
+                              <br>
+                              <p class="col m12">{{ item.pdescription }}</p>
+                                <br>
+                                <div class="m12">
+                                    <small class="m6">{{ item.likecount }} people likes</small>
+                                    <small class="m6 offset-m1" >  ${{ item.amountpledged }} pledged</small>
+                                </div>
+
+                                <small>  ${{ item.maxbudget|sub:item.amountpledged }} to go</small>
+                                <small>  {{ item.pstarttime|timesince:item.plancompletetime }} left</small>
+                            </div>
+                            <div class="card-action">
+                              <a href="{% url 'kickstar:project' item.pk %}"><small>Detail</small></a>
+                            </div>
+                          </div>
                       </div>
-                    </div>
-                {% endfor %}
+                  {% endfor %}
             {% else %}
                 <div class="row">
                     <span>Sorry, there are no project in {{ category.cname }} so far.</span>

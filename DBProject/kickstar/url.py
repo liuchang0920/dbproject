@@ -27,4 +27,6 @@ urlpatterns = [
     url(r'^search/$', views.search, name='search'),
     url(r'^rateproject/$', views.rate_project, name="rateproject"),
     url(r'^updateproject/$', views.update_project, name="updateproject"),
+    url(r'^unfollow/(?P<followingusername>[a-zA-Z0-9]+)/$', views.unfollow, name="unfollow"),
+    url(r'^follow/(?P<followeeusername>[a-zA-Z0-9]+)/$', views.follow, name="follow"),
 ]

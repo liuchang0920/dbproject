@@ -20,6 +20,42 @@
 <!--popular-->
       <div class="container">
           <div class="row">
+            <h4 class="col m6">Newest Projects</h4>
+            <span class="col m1 offset-m10"><a href="{% url 'kickstar:category' %}" class="btn ">more</a></span>
+          </div>
+          <div class="row">
+              {% for item in newest_project %}
+                  <div class="col s12 m4">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="{% static item.pbackgroundpic %}" style="height: 200px">
+                          <span class="card-title">{{ item.pname }}</span>
+                        </div>
+                        <div class="card-content">
+                          <p><small class="grey-text">by {{ item.user.username }}</small></p>
+                          <br>
+                          <p class="col m12">{{ item.pdescription }}</p>
+                            <br>
+                            <div class="m12">
+                                <small class="m6">{{ item.likecount }} people likes</small>
+                                <small class="m6 offset-m1" >  ${{ item.amountpledged }} pledged</small>
+                            </div>
+
+                            <small>  ${{ item.maxbudget|sub:item.amountpledged }} to go</small>
+                            <small>  {{ item.pstarttime|timesince:item.plancompletetime }} left</small>
+                        </div>
+                        <div class="card-action">
+                          <a href="{% url 'kickstar:project' item.pk %}"><small>Detail</small></a>
+                        </div>
+                      </div>
+                  </div>
+              {% endfor %}
+          </div>
+      </div>
+    <br>
+<!--newest-->
+      <div class="container">
+          <div class="row">
             <h4 class="col m6">Popular Projects</h4>
             <span class="col m1 offset-m10"><a href="{% url 'kickstar:category' %}" class="btn ">more</a></span>
           </div>
@@ -50,184 +86,9 @@
                       </div>
                   </div>
               {% endfor %}
-
-{#              <div class="col s12 m4">#}
-{#              <div class="card">#}
-{#                <div class="card-image">#}
-{#                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">#}
-{#                  <span class="card-title">Card Title</span>#}
-{#                </div>#}
-{#                <div class="card-content">#}
-{#                  <p>I am a very simple card. I am good at containing small bits of information.#}
-{#                  I am convenient because I require little markup to use effectively.</p>#}
-{#                </div>#}
-{#                <div class="card-action">#}
-{#                  <a href="#">This is a link</a>#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#              <div class="col s12 m4">#}
-{#              <div class="card">#}
-{#                <div class="card-image">#}
-{#                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">#}
-{#                  <span class="card-title">Card Title</span>#}
-{#                </div>#}
-{#                <div class="card-content">#}
-{#                  <p>I am a very simple card. I am good at containing small bits of information.#}
-{#                  I am convenient because I require little markup to use effectively.</p>#}
-{#                </div>#}
-{#                <div class="card-action">#}
-{#                  <a href="#">This is a link</a>#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#              <div class="col s12 m4">#}
-{#              <div class="card">#}
-{#                <div class="card-image">#}
-{#                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">#}
-{#                  <span class="card-title">Card Title</span>#}
-{#                </div>#}
-{#                <div class="card-content">#}
-{#                  <p>I am a very simple card. I am good at containing small bits of information.#}
-{#                  I am convenient because I require little markup to use effectively.</p>#}
-{#                </div>#}
-{#                <div class="card-action">#}
-{#                  <a href="#">This is a link</a>#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#              <div class="col s12 m4">#}
-{#              <div class="card">#}
-{#                <div class="card-image">#}
-{#                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">#}
-{#                  <span class="card-title">Card Title</span>#}
-{#                </div>#}
-{#                <div class="card-content">#}
-{#                  <p>I am a very simple card. I am good at containing small bits of information.#}
-{#                  I am convenient because I require little markup to use effectively.</p>#}
-{#                </div>#}
-{#                <div class="card-action">#}
-{#                  <a href="#">This is a link</a>#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#              <div class="col s12 m4">#}
-{#              <div class="card">#}
-{#                <div class="card-image">#}
-{#                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">#}
-{#                  <span class="card-title">Card Title</span>#}
-{#                </div>#}
-{#                <div class="card-content">#}
-{#                  <p>I am a very simple card. I am good at containing small bits of information.#}
-{#                  I am convenient because I require little markup to use effectively.</p>#}
-{#                </div>#}
-{#                <div class="card-action">#}
-{#                  <a href="#">This is a link</a>#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
           </div>
       </div>
     <br>
-<!--recommendation-->
-      <div class="container">
-          <div class="row">
-                <h4 class="col m6">Recommended Projects</h4>
-                <span class="col m1 offset-m10"><a href="" class="btn ">more</a></span>
-          </div>
-          <div class="row">
-            <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-              <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-              <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-              <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-              <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-              <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="{% static 'kickstar/images/sample-1.jpg' %}">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
     <script>
         function nextPage(){
             $('.carousel').carousel('next');

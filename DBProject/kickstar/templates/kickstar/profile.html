@@ -60,17 +60,23 @@
     <div class="col s4 m4">
         <div class="">
             <h4 class="">
-                Following
+                Followed
             </h4>
             <div class="col m12">
               <ul class="collection ">
-                <li class="collection-item "><div >Alvin<a href="#!" class="secondary-content  btn ">follow</a></div></li>
-                <li class="collection-item "><div >Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
-                <li class="collection-item "><div>Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
-                <li class="collection-item "><div >Alvin<a href="#!" class="secondary-content  btn ">follow</a></div></li>
-                <li class="collection-item "><div  >Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
-                <li class="collection-item "><div  >Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>
-{#                <li class="collection-item "><div>Alvin</div></li>#}
+                  {% if followers|length != 0 %}
+                      {% for item in followers %}
+                          <li class="collection-item "><div style="padding-top: 5%">{{ item.follower.username }}</div></li> <!--<a href="#!" class="secondary-content  btn ">follow</a>-->
+                      {% endfor %}
+                  {% else %}
+                      <li class="collection-item ">There is no body following you.</li>
+                  {% endif %}
+
+{#                <li class="collection-item "><div >Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>#}
+{#                <li class="collection-item "><div>Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>#}
+{#                <li class="collection-item "><div >Alvin<a href="#!" class="secondary-content  btn ">follow</a></div></li>#}
+{#                <li class="collection-item "><div  >Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>#}
+{#                <li class="collection-item "><div  >Alvin<a href="#!" class="secondary-content btn">follow</a></div></li>#}
               </ul>
             </div>
         </div>
@@ -78,13 +84,18 @@
     <div class="col s4 m4">
         <div class="">
             <h4 class="">
-                Followed
+                Following
             </h4>
             <div class="col m12 ">
               <ul class="collection ">
-                <li class="collection-item "><div >Alvin<a href="#!" class="secondary-content  btn red">unfollow</a></div></li>
-                <li class="collection-item "><div  >Alvin<a href="#!" class="secondary-content btn red">unfollow</a></div></li>
-                <li class="collection-item "><div  >Alvin<a href="#!" class="secondary-content btn red">unfollow</a></div></li>
+                  {% if following|length != 0 %}
+                      {% for item in following %}
+                          <li class="collection-item "><div style="padding-top: 5%">{{ item.followee.username }}<a href="{% url 'kickstar:unfollow' item.followee.username  %}" class="secondary-content  btn red lighten-1" style="padding-bottom: 10%">unfollow</a></div></li>
+                      {% endfor %}
+                  {% else %}
+                      <li class="collection-item ">you follow nobody.</li>
+                  {% endif %}
+
 {#                <li class="collection-item "><div>Alvin</div></li>#}
               </ul>
             </div>
@@ -230,4 +241,5 @@
 {#         Materialize.toast('{{ message }}', 4000);#}
 {#  </script>#}
 {#{%  endif %}#}
+
 {% endblock %}

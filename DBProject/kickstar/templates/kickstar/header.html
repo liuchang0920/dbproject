@@ -16,7 +16,7 @@
     <li><a href="{% url 'kickstar:category' %}">Category</a></li>
     <li><a href="{% url 'kickstar:startproject' %}">Start a project</a></li>
     <li>
-        {% if request.session.username %}
+        {% if request.session.user %}
            <!-- Dropdown Trigger -->
           <a class='dropdown-button btn ' href='#' data-activates='dropdown1' style=" width: 100%;">{{ request.session.user.username }}</a>
 
